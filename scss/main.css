@@ -1,0 +1,18 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+.section {
+  color: green;
+}
+
+.article {
+  color: red;
+}
+
+.wrapper {
+  background-color: blue;
+}
+
+/*# sourceMappingURL=main.css.map */
