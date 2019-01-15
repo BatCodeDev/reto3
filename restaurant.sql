@@ -89,7 +89,7 @@ CREATE TABLE `productcategory` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(10) NOT NULL,
-  `subname` varchar(20) NOT NULL,
+  `surname` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL,
   `telephone` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
