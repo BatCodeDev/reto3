@@ -30,4 +30,22 @@ class Product extends Generic{
     public function setPrize($prize){
         $this->prize = $prize;
     }
+
+    public function getAll(){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
+
+    public function selectById($id){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product WHERE id = :id"
+        );
+        $res->execute(array(
+            "id"=>$id
+        ));
+        return $res->fetchAll()[0];
+    }
 }

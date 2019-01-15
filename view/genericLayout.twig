@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <script src="bootstrap/jquery.js"></script>
-    <script src="bootstrap/popper.js"></script>
+    <script src="bootstrap/bootstrap.js"></script>
+    <script src="js/main.js"></script>
     <title></title>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -15,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php?controller=Product&action=toProducts">Platos <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -44,7 +45,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        {
+        {% block content %}{% endblock %}
     </div>
 </body>
 </html>

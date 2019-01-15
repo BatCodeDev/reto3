@@ -1,0 +1,54 @@
+{% extends "genericLayout.twig"%}
+{% block content %}
+    <style>
+        .card{
+            padding: 0;
+        }
+        .card img{
+            cursor: pointer;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action active">
+                    Cras justo odio
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+                <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+                <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+                <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="modelContainter"></div>
+            <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="ProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ProductModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in products %}
+                    <div class="card col-md-4" style="width: 18rem;">
+                        <img id="{{ product.id }}" src="img/1.jpg" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
+                        <div class="card-body">
+                            <p class="card-text">{{ product.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
