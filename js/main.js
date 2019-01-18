@@ -6,10 +6,7 @@ function modal(id) {
     });
 }
 function ajax_listen(idForm, target, action, admin){
-    if(admin){
-        var form_data = "user="+idForm[0].value+"&pass="+idForm[1].value
-    }else
-        var form_data = $("#"+idForm.id).serialize();
+    var form_data = $("#"+idForm).serialize();
     $.ajax({
         type: "POST",
         url: target,
