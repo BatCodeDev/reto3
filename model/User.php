@@ -39,16 +39,4 @@ class User extends Generic{
         $this->tlfo = $tlfo;
     }
 
-    public function selectByName($user){
-        $res = $this->getConnection()->prepare(
-            "SELECT * FROM admin WHERE user = :user"
-        );
-        $res->execute(array(
-            "user"=>$user
-        ));
-        $result = $res->fetchAll();
-        $this->setConnection(null);
-        return $result;
-    }
-
 }
