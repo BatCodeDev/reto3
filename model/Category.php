@@ -15,5 +15,30 @@ class Category extends Generic{
         $this->name = $name;
     }
 
+    public function insertCategory($name){
+        $res = parent::getConnection()->prepare(
+            "INSERT INTO category (name) VALUES (:name)"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+    }
 
+    public function updateCategory($name){
+        $res = parent::getConnection()->prepare(
+            "UPDATE category SET name = :name WHERE name = :name"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+    }
+
+    public function deleteCategory($name){
+        $res = parent::getConnection()->prepare(
+            "DELETE FROM category WHERE name = :name"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+    }
 }

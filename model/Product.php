@@ -48,4 +48,37 @@ class Product extends Generic{
         ));
         return $res->fetchAll()[0];
     }
+
+    public function insertProduct($name, $description, $prize){
+        $res = parent::getConnection()->prepare(
+            "INSERT INTO product (name, description, prize) VALUES (:name, :description, :prize)"
+        );
+        $res->execute(array(
+            "name"=>$name,
+            "description"=>$description,
+            "prize"=>$prize
+        ));
+    }
+
+    public function updateProduct($name, $description, $prize){
+        $res = parent::getConnection()->prepare(
+            "UPDATE product SET name = :name, description = :description, prize = :prize WHERE name = :name"
+        );
+        $res->execute(array(
+            "name"=>$name,
+            "description"=>$description,
+            "prize"=>$prize
+        ));
+    }
+
+    public function deleteProduct($name){
+        $res = parent::getConnection()->prepare(
+            "DELETE FROM product WHERE name = :name"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+    }
+
+
 }
