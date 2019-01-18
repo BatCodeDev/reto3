@@ -7,6 +7,10 @@
     <script src="bootstrap/jquery.js"></script>
     <script src="bootstrap/bootstrap.js"></script>
     <script src="js/main.js"></script>
+    <link href="bootstrap/fontAwesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="scss/main.css">
     <title></title>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -19,7 +23,7 @@
                     <a class="nav-link" href="index.php?controller=Product&action=toProducts">Platos <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#LoginModal">Log In</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,6 +46,37 @@
             </form>
         </div>
     </nav>
+    <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="LoginModalLabel">Log in de administrador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="loginForm" onsubmit="return ajax_listen(this.id, 'index.php?controller=User&action=loginValidate', errorLogin)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="user">Usuario</label>
+                            <input id="user" name="user" type="text" class="form-control" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Contraseña</label>
+                            <input id="pass" name="pass" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div id="msg" class="alert"><i class="fas"></i><span></span></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-sign-in-alt"></i> Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </head>
 <body>
     <div class="container-fluid">
