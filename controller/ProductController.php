@@ -12,17 +12,28 @@ class ProductController extends GenericController {
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
-
-    public function index(){
-        $this->view("index", array(
-            "title"=>"Restaurante",
-        ));
-    }
     public function toProducts(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         $product = new Product($this->connection);
         $this->view("products", array(
-            "title"=>"Restaurante",
-            "products"=>$product->getAll()
+            "products"=>$product->getAll(),
+            "activate"=>"active",
+            "id"=>$id,
+            "user"=>$user
+        ));
+    }
+    public function insert(){
+        $user = null;
+        if ($_SESSION["user"]){
+            $user = $_SESSION["user"];
+        }
+        $this->view("addProduct", array(
+            "user"=>$user
         ));
     }
     public function modal(){

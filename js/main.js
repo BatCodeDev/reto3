@@ -5,8 +5,11 @@ function modal(id) {
         $("#ProductModal .modal-body").html(modalData.description);
     });
 }
-function ajax_listen(idForm, target, action){
-    let form_data = $("#"+idForm).serialize();
+function ajax_listen(idForm, target, action, admin){
+    if(admin){
+        var form_data = "user="+idForm[0].value+"&pass="+idForm[1].value
+    }else
+        var form_data = $("#"+idForm.id).serialize();
     $.ajax({
         type: "POST",
         url: target,
@@ -25,7 +28,7 @@ let errorLogin = function (data) {
         $("#msg i").addClass("fa-check-circle");
         $("#msg").show();
         setTimeout(function () {
-            window.location.reload();
+            window.location.href = "index.php";
         }, 1000);
     }else{
         $("#msg span").html(" Usuario o contraseña incorrectos");
