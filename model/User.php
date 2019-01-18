@@ -39,18 +39,6 @@ class User extends Generic{
         $this->tlfo = $tlfo;
     }
 
-    public function selectByName($user){
-        $res = $this->getConnection()->prepare(
-            "SELECT * FROM admin WHERE user = :user"
-        );
-        $res->execute(array(
-            "user"=>$user
-        ));
-        $result = $res->fetchAll();
-        $this->setConnection(null);
-        return $result;
-    }
-
     public function insertUser($name, $surname, $email, $telephone){
         $res = parent::getConnection()->prepare(
             "INSERT INTO user (name, surname, email, telephone) VALUES (:name, :surname, :email, :telephone)"
