@@ -39,4 +39,37 @@ class User extends Generic{
         $this->tlfo = $tlfo;
     }
 
+    public function insertUser($name, $surname, $email, $telephone){
+        $res = parent::getConnection()->prepare(
+            "INSERT INTO user (name, surname, email, telephone) VALUES (:name, :surname, :email, :telephone)"
+        );
+        $res->execute(array(
+            "name"=>$name,
+            "surname"=>$surname,
+            "email"=>$email,
+            "telephone"=>$telephone
+        ));
+    }
+
+    public function updateUser($name, $surname, $email, $telephone){
+        $res = parent::getConnection()->prepare(
+            "UPDATE user SET name = :name, surname = :surname, email = :email, telephone = :telephone WHERE email = :email"
+        );
+        $res->execute(array(
+            "name"=>$name,
+            "surname"=>$surname,
+            "email"=>$email,
+            "telephone"=>$telephone
+        ));
+    }
+
+    public function deleteUser($email){
+        $res = parent::getConnection()->prepare(
+            "DELETE FROM user WHERE email = :email"
+        );
+        $res->execute(array(
+            "email"=>$email
+        ));
+    }
+
 }
