@@ -28,7 +28,30 @@ class ProductController extends GenericController {
             "listProduct" => $_SESSION["cart"]
         ));
     }
+    public function setAll($product){
+        $product->setName($_POST["name"]);
+        $product->setDescription($_POST["descr"]);
+        $product->setPrize($_POST["prize"]);
+        return $product;
+    }
     public function insert(){
+        $product = $this->setAll(new Product($this->connection));
+        if ($_FILES["img"]["error"] > 0){
+            echo "Error: " . $_FILES["file"]["error"] . "<br />";
+        }else{
+            $extension = explode("/", $_FILES["img"]["type"])[1];
+            $img = uniqid().'.'.$extension;
+            $url = "img/productImg/".$img;
+            $product->setImg($img);
+            $ok = $product->insertProduct();
+            //die($ok);
+            if($ok != 1)
+                move_uploaded_file($_FILES["img"]["tmp_name"], $url);
+            header("location:index.php?controller=product&action=toProducts");
+        }
+    }
+
+    public function addProduct(){
         $user = null;
         if ($_SESSION["user"]){
             $user = $_SESSION["user"];

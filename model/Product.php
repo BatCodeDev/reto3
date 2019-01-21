@@ -1,7 +1,9 @@
 <?php
 require_once "Generic.php";
 class Product extends Generic{
-    private $name, $description, $prize;
+    private $connection;
+
+    private $name, $description, $prize, $img;
 
     public function __construct($connection){
         parent::__construct($connection);
@@ -31,6 +33,14 @@ class Product extends Generic{
         $this->prize = $prize;
     }
 
+    public function getImg(){
+        return $this->img;
+    }
+
+    public function setImg($img){
+        $this->img = $img;
+    }
+
     public function getAll(){
         $res = parent::getConnection()->prepare(
             "SELECT * FROM product"
@@ -48,16 +58,22 @@ class Product extends Generic{
         ));
         return $res->fetchAll()[0];
     }
-
-    public function insertProduct($name, $description, $prize){
+    public function data(){
+        return [
+            "name"=>$this->name,
+            "description"=>$this->description,
+            "prize"=>$this->prize,
+            "img"=>$this->img
+        ];
+    }
+    public function insertProduct(){
         $res = parent::getConnection()->prepare(
-            "INSERT INTO product (name, description, prize) VALUES (:name, :description, :prize)"
+            "INSERT INTO product (name, description, prize, img) VALUES (:name, :description, :prize, :img)"
         );
-        $res->execute(array(
-            "name"=>$name,
-            "description"=>$description,
-            "prize"=>$prize
-        ));
+        $res->execute($this->data());
+        $lastid = parent::getConnection()->lastInsertId();
+        $this->connection = null;
+        return $lastid;
     }
 
     public function updateProduct($name, $description, $prize){
