@@ -38,7 +38,13 @@ class User extends Generic{
     public function setTlfo($tlfo){
         $this->tlfo = $tlfo;
     }
-
+    public function getAll(){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM admin"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
     public function selectByName($user){
         $res = $this->getConnection()->prepare(
             "SELECT * FROM admin WHERE user = :user"
