@@ -42,7 +42,7 @@
             <div class="row">
                 {% for product in products %}
                     <div class="card col-md-4" style="width: 18rem;">
-                        <img id="{{ product.id }}" src="img/1.jpg" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
+                        <img id="{{ product.id }}" src="img/productImg/{{ product.img }}" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
                         <div class="card-body">
                             <p class="card-text">{{ product.description }}</p>
                         </div>
