@@ -1,6 +1,6 @@
 {% extends "genericLayout.twig"%}
 {% block content %}
-    <form id="loginForm" onsubmit="return ajax_listen(this.id, 'index.php?controller=User&action=loginValidate', errorLogin, true)">
+    <form id="loginForm" class="col-6 offset-3" onsubmit="return ajax_listen(this.id, 'index.php?controller=User&action=loginValidate', errorLogin, true)">
         <div class="modal-body">
             <div class="form-group">
                 <label for="user">Usuario</label>
@@ -13,8 +13,8 @@
             <div class="form-group">
                 <div id="msg" class="alert"><i class="fas"></i><span></span></div>
             </div>
+            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-outline-success"><i class="fas fa-sign-in-alt"></i> Aceptar</button>
         </div>
-        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-outline-success"><i class="fas fa-sign-in-alt"></i> Aceptar</button>
     </form>
 {% endblock %}
