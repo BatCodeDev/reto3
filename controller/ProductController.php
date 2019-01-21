@@ -24,7 +24,8 @@ class ProductController extends GenericController {
             "products"=>$product->getAll(),
             "activate"=>"active",
             "id"=>$id,
-            "user"=>$user
+            "user"=>$user,
+            "listProduct" => $_SESSION["cart"]
         ));
     }
     public function setAll($product){
@@ -62,5 +63,13 @@ class ProductController extends GenericController {
     public function modal(){
         $product = new Product($this->connection);
         echo json_encode($product->selectById($_GET["idProduct"]));
+    }
+    public function addCart(){
+        if (isset($_SESSION["cart"])) {
+            array_push($_SESSION["cart"], $_GET["nameProduct"]);
+        }else{
+            $_SESSION["cart"] = array($_GET["nameProduct"]);
+        }
+        echo print_r($_SESSION["cart"]);
     }
 }
