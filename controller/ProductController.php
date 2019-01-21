@@ -15,6 +15,10 @@ class ProductController extends GenericController {
     public function toProducts(){
         $id = null;
         $user = null;
+        $listProduct = array();
+        if (isset($_SESSION["cart"])){
+            $listProduct = $_SESSION["cart"];
+        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -25,7 +29,7 @@ class ProductController extends GenericController {
             "activate"=>"active",
             "id"=>$id,
             "user"=>$user,
-            "listProduct" => $_SESSION["cart"]
+            "listProduct" => $listProduct
         ));
     }
     public function setAll($product){
