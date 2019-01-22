@@ -1,6 +1,6 @@
 {% extends "genericLayout.twig" %}
 {% block content %}
-    <form action="index.php?controller=Product&action=insert" class="col-6 offset-3" method="post" enctype="multipart/form-data">
+    <form action="index.php?controller=Product&action=insert" class="col-md-6 offset-md-3" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
             <input id="name" name="name" class="form-control" type="text">
@@ -22,6 +22,6 @@
                 <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
             </div>
         </div>
-        <button type="submit" class="btn btn-outline-success">Añadir</button>
+        <button type="submit" class="btn btn-outline-success"><i class="fas fa-plus"></i> Añadir</button>
     </form>
 {% endblock %}

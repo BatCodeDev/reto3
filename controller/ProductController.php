@@ -16,7 +16,7 @@ class ProductController extends GenericController {
         $id = null;
         $user = null;
         $listProduct = array();
-        if (isset($_SESSION["cart"])) {
+        if (isset($_SESSION["cart"])){
             $listProduct = $_SESSION["cart"];
         }
         if (isset($_SESSION["id"], $_SESSION["user"])){

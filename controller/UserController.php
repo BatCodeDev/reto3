@@ -50,6 +50,24 @@ class UserController extends GenericController {
             }
         }
     }
+    public function delete(){
+        $user = new User($this->connection);
+        $user->delete($_GET["idUser"], "admin");
+        header("location:index.php?controller=User&action=toManageAdmins");
+    }
+    public function toManageAdmins(){
+        $user = new User($this->connection);
+        $users =  $user->getAll();
+        for ($x = 0; $x < sizeof($users) && $users[$x]["id"] != $_SESSION["id"]; $x++){}
+        $current = $users[$x];
+        $this->view("manageAdmins", array(
+            "title"=>"Gestion de administradores",
+            "admins"=>$users,
+            "id"=> $_SESSION["id"],
+            "user"=> $_SESSION["user"],
+            "current" => $current
+        ));
+    }
     public function logOut(){
         session_destroy();
         header("location:index.php");
