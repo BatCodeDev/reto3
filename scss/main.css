@@ -1,18 +1,5 @@
-body {
-  font: 100% Helvetica, sans-serif;
-  color: #333;
-}
-
-.section {
-  color: green;
-}
-
-.article {
-  color: red;
-}
-
-.wrapper {
-  background-color: blue;
+#msg {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */
