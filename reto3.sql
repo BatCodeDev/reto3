@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2019 a las 08:52:52
+-- Tiempo de generación: 22-01-2019 a las 10:00:42
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -41,7 +41,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `name`, `telephone`) VALUES
-(1, 'admin', 'admin', 'Alejandro', '999999999');
+(1, 'admin', 'admin', 'Alejandro', '999999999'),
+(2, 'admin2', 'admin2', 'Rafa', '888888888'),
+(3, 'admin3', 'admin3', 'Alfonso', '777777777');
 
 -- --------------------------------------------------------
 
@@ -91,8 +93,19 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `prize` double NOT NULL
+  `prize` double NOT NULL,
+  `img` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`) VALUES
+(2, 'plato1', 'nada', 2.3, '5c46cf6baa3b8.png'),
+(3, 'plato2', 'nada2', 3.4, '5c46d10d74718.png'),
+(4, 'plato3', 'nada3', 3.4, '5c46da83b6293.png'),
+(5, 'plato4', 'nada4', 4.3, '5c46daef26c06.jpeg');
 
 -- --------------------------------------------------------
 
@@ -155,7 +168,7 @@ ALTER TABLE `productcategory`
 -- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -173,7 +186,7 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
