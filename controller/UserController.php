@@ -19,6 +19,7 @@ class UserController extends GenericController {
         $id = null;
         $user = null;
         $listProduct = 0;
+        $_SESSION["qty"] = 0;
         if (isset($_SESSION["cart"])){
             $quantity = 0;
             foreach ($_SESSION["cart"] as $product) {
