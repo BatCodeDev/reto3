@@ -4,8 +4,10 @@ if(isset($_GET["controller"])){
     $controllerObj = loadController($_GET["controller"]);
     launchAction($controllerObj);
 }else{
-    $controllerObj = loadController(DEFAULT_CONTROLLER);
-    launchAction($controllerObj);
+
+        $controllerObj = loadController(DEFAULT_CONTROLLER);
+        launchAction($controllerObj);
+
 }
 function loadController($controller){
     $file = "controller/".$controller."Controller.php";

@@ -7,38 +7,64 @@
     <script src="bootstrap/jquery.js"></script>
     <script src="bootstrap/bootstrap.js"></script>
     <script src="js/main.js"></script>
-    <title></title>
+    <link href="bootstrap/fontAwesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="scss/main.css">
+    <title>{{ user }}</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="index.php">BatFood</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item {{ activate }}">
                     <a class="nav-link" href="index.php?controller=Product&action=toProducts">Platos <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="dropdown">
+                    <a href="#" id="quantity" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="fa fa-gift bigicon"></span> {{ listProduct|length }} - Items in Cart<span class="caret"></span></a>
+                  <ul class="dropdown-menu dropdown-cart" role="menu">
+                        <div id="listProduct">
+                            {% for element in listProduct
+                                %}
+                                {{element}}
+
+                            {% endfor %}
+                        </div>
+                   </ul>
+                </li>           
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    {% if user != null %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.php?controller=User&action=logOut">Cerrar session</a>
+                        </div>
+                    </li>
                 </li>
+                    {% endif %}
+                {% if user != null %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Acciones
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="index.php?controller=Product&action=addProduct">Añadir plato</a>
+                            <a class="dropdown-item" href="index.php?controller=User&action=toManageAdmins">Gestionar administradores</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
+                {% endif %}
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
             </form>
         </div>
     </nav>
