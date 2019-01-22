@@ -2,4 +2,8 @@
   display: none;
 }
 
+.card img {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=main.css.map */

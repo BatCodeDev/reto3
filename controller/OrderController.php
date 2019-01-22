@@ -7,16 +7,15 @@ class OrderController extends GenericController {
 
     public function __construct(){
         require_once __DIR__."/../core/Connection.php";
-        //require_once __DIR__."/../model/Bodega.php";
-        //require_once __DIR__."/../model/Vino.php";
+        require_once __DIR__."/../model/Order.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
 
-    public function index(){
-        $this->view("index", array(
-            "title"=>"Restaurante",
+    public function addOrder(){
+        $this->view("newOrder", array(
+            "title"=>"Pedido",
         ));
     }
 
