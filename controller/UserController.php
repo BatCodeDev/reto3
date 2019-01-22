@@ -18,6 +18,10 @@ class UserController extends GenericController {
     public function index(){
         $id = null;
         $user = null;
+        $listProduct = array();
+        if (isset($_SESSION["cart"])) {
+            $listProduct = $_SESSION["cart"];
+        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -25,7 +29,8 @@ class UserController extends GenericController {
         $this->view("index", array(
             "title"=>"BatFood",
             "id"=>$id,
-            "user"=> $user
+            "user"=> $user,
+            "listProduct" => $listProduct
         ));
     }
     public function loginValidate(){
