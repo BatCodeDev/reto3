@@ -12,11 +12,20 @@ class OrderController extends GenericController {
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
-
-    public function addOrder(){
+    public function cart(){
+        $cart = null;
+        if (isset($_SESSION["cart"])){
+            $cart = $_SESSION["cart"];
+        }
         $this->view("newOrder", array(
             "title"=>"Pedido",
+            "cart"=>$cart,
+            "listProduct"=>$_SESSION["qty"]
         ));
     }
-
+    public function insert(){
+        if($_SESSION["qty"] == 0){
+            echo 1;
+        }
+    }
 }

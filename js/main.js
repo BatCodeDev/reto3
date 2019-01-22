@@ -23,6 +23,13 @@ function ajax_listen(idForm, target, action){
     });
     return false;
 }
+let errorCart = function (data) {
+    if (data == 1){
+        $("#orderMsg").show();
+    }else{
+
+    }
+}
 let errorLogin = function (data) {
     if(data == "1") {
         $("#msg span").html(" Log in con exito");
