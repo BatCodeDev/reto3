@@ -15,6 +15,10 @@ class ProductController extends GenericController {
     public function toProducts(){
         $id = null;
         $user = null;
+        $listProduct = array();
+        if (isset($_SESSION["cart"])) {
+            $listProduct = $_SESSION["cart"];
+        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -25,7 +29,7 @@ class ProductController extends GenericController {
             "activate"=>"active",
             "id"=>$id,
             "user"=>$user,
-            "listProduct" => $_SESSION["cart"]
+            "listProduct" => $listProduct
         ));
     }
     public function setAll($product){
@@ -44,8 +48,8 @@ class ProductController extends GenericController {
             $url = "img/productImg/".$img;
             $product->setImg($img);
             $ok = $product->insertProduct();
-            //die($ok);
-            if($ok != 1)
+
+            if($ok != 0)
                 move_uploaded_file($_FILES["img"]["tmp_name"], $url);
             header("location:index.php?controller=product&action=toProducts");
         }
@@ -66,10 +70,14 @@ class ProductController extends GenericController {
     }
     public function addCart(){
         if (isset($_SESSION["cart"])) {
-            array_push($_SESSION["cart"], $_GET["nameProduct"]);
+            if (isset($_SESSION["cart"][$_POST["nameProduct"]])) {
+                $quant = $_SESSION["cart"][$_POST["nameProduct"]]["quantity"];
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "name" => $_POST["nameProduct"]);  
+            }
         }else{
-            $_SESSION["cart"] = array($_GET["nameProduct"]);
+            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "name" => $_POST["nameProduct"]); 
+            
         }
-        echo print_r($_SESSION["cart"]);
+        echo json_encode($_SESSION["cart"]);
     }
 }
