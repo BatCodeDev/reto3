@@ -18,9 +18,13 @@ class UserController extends GenericController {
     public function index(){
         $id = null;
         $user = null;
-        $listProduct = array();
-        if (isset($_SESSION["cart"])) {
-            $listProduct = $_SESSION["cart"];
+        $listProduct = 0;
+        if (isset($_SESSION["cart"])){
+            $quantity = 0;
+            foreach ($_SESSION["cart"] as $product) {
+                $quantity = $quantity + $product["quantity"];
+            }
+            $listProduct = $quantity;
         }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
