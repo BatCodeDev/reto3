@@ -18,9 +18,13 @@ class UserController extends GenericController {
     public function index(){
         $id = null;
         $user = null;
-        $listProduct = array();
-        if (isset($_SESSION["cart"])) {
-            $listProduct = $_SESSION["cart"];
+        $listProduct = 0;
+        if (isset($_SESSION["cart"])){
+            $quantity = 0;
+            foreach ($_SESSION["cart"] as $product) {
+                $quantity = $quantity + $product["quantity"];
+            }
+            $listProduct = $quantity;
         }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
@@ -49,6 +53,24 @@ class UserController extends GenericController {
                 }
             }
         }
+    }
+    public function delete(){
+        $user = new User($this->connection);
+        $user->delete($_GET["idUser"], "admin");
+        header("location:index.php?controller=User&action=toManageAdmins");
+    }
+    public function toManageAdmins(){
+        $user = new User($this->connection);
+        $users =  $user->getAll();
+        for ($x = 0; $x < sizeof($users) && $users[$x]["id"] != $_SESSION["id"]; $x++){}
+        $current = $users[$x];
+        $this->view("manageAdmins", array(
+            "title"=>"Gestion de administradores",
+            "admins"=>$users,
+            "id"=> $_SESSION["id"],
+            "user"=> $_SESSION["user"],
+            "current" => $current
+        ));
     }
     public function logOut(){
         session_destroy();

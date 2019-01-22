@@ -1,0 +1,25 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    <form action="" class="col-md-6 offset-md-3">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="surname">Apellidos</label>
+            <input id="surname" name="surname" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tlfo">Telefono</label>
+            <input id="tlfo" name="tlfo" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-primary">Volver</button>
+            <button class="btn btn-outline-success">Finalizar</button>
+        </div>
+    </form>
+{% endblock %}

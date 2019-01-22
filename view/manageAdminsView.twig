@@ -1,0 +1,33 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    <table class="table col-md-8 offset-md-2">
+        <thead>
+        <tr>
+            <th scope="col">Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="table-primary">
+                <td>{{ current.user }}</td>
+                <td>{{ current.name }}</td>
+                <td>{{ current.telephone }}</td>
+                <td></td>
+            </tr>
+        {% for a in admins if id != a.id %}
+            <tr {% if id == a.id %}class="table-primary" {% endif %}>
+                <td>{{ a.user }}</td>
+                <td>{{ a.name }}</td>
+                <td>{{ a.telephone }}</td>
+                <td class="text-center text-md-left">
+                    {% if id != a.id %}
+                        <a href="index.php?controller=User&action=delete&idUser={{ a.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> <span class="d-none d-md-inline">Elminiar</span></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
