@@ -76,12 +76,12 @@ class ProductController extends GenericController {
         if (isset($_SESSION["cart"])) {
             if (isset($_SESSION["cart"][$_POST["nameProduct"]])) {
                 $quant = $_SESSION["cart"][$_POST["nameProduct"]]["quantity"];
-                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "name" => $_POST["nameProduct"]);  
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);  
             }else{
-                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "name" => $_POST["nameProduct"]); 
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]); 
             }
         }else{
-            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "name" => $_POST["nameProduct"]); 
+            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]); 
             
         }
         echo json_encode($_SESSION["cart"]);

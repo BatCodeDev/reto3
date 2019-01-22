@@ -3,7 +3,11 @@ function modal(id) {
         let modalData = JSON.parse(data);
         $("#ProductModalLabel").html(modalData.name);
         $("#ProductModal .modal-body").html(modalData.description);
+
+        $("input[name='idProduct']").val(modalData.id);
         $("input[name='nameProduct']").val(modalData.name);
+        $("input[name='prizeProduct']").val(modalData.prize);
+        $("input[name='imgProduct']").val(modalData.img);
     });
 }
 function ajax_listen(idForm, target, action){
