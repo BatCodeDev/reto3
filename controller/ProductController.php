@@ -8,28 +8,28 @@ class ProductController extends GenericController {
     public function __construct(){
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
-
+        require_once __DIR__."/../model/Category.php";
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
     public function toProducts(){
         $id = null;
         $user = null;
-        $listProduct = array();
-        if (isset($_SESSION["cart"])){
-            $listProduct = $_SESSION["cart"];
-        }
+        $categories=array();
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
         }
+        $categories=new Category ($this->connection);
+        $categories=$categories->getAll();
         $product = new Product($this->connection);
         $this->view("products", array(
             "products"=>$product->getAll(),
             "activate"=>"active",
             "id"=>$id,
             "user"=>$user,
-            "listProduct" => $listProduct
+            "listProduct" => $_SESSION["qty"],
+            "categories"=> $categories
         ));
     }
     public function setAll($product){
@@ -48,8 +48,8 @@ class ProductController extends GenericController {
             $url = "img/productImg/".$img;
             $product->setImg($img);
             $ok = $product->insertProduct();
-            //die($ok);
-            if($ok != 1)
+
+            if($ok != 0)
                 move_uploaded_file($_FILES["img"]["tmp_name"], $url);
             header("location:index.php?controller=product&action=toProducts");
         }
@@ -70,10 +70,57 @@ class ProductController extends GenericController {
     }
     public function addCart(){
         if (isset($_SESSION["cart"])) {
-            array_push($_SESSION["cart"], $_GET["nameProduct"]);
+            if (isset($_SESSION["cart"][$_POST["nameProduct"]])) {
+                $quant = $_SESSION["cart"][$_POST["nameProduct"]]["quantity"];
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
+            }else{
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
+            }
         }else{
-            $_SESSION["cart"] = array($_GET["nameProduct"]);
+            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
+            
         }
-        echo print_r($_SESSION["cart"]);
+        $quantity = 0;
+        foreach ($_SESSION["cart"] as $product) {
+            $quantity = $quantity + $product["quantity"];
+            $_SESSION["qty"] = $quantity;
+        }
+        echo json_encode($_SESSION["cart"]);
+    }
+    public function searchCart(){
+        foreach ($_SESSION["cart"] as $product) {
+            if(intval($product["id"]) == $_GET["idProduct"])
+                return $product;
+        }
+    }
+    public function addQtyCart(){
+        $product = $this->searchCart();
+        $_SESSION["qty"]++;
+        $_SESSION["cart"][$product["name"]]["quantity"]++;
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "id"=>$_GET["idProduct"]
+            ]
+        );
+    }
+    public function removeQtyCart(){
+        $product = $this->searchCart();
+        if($product["quantity"] != 1) {
+            $_SESSION["qty"]--;
+            $_SESSION["cart"][$product["name"]]["quantity"]--;
+        }
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "id"=>$_GET["idProduct"]
+            ]
+        );
+    }
+    public function delete(){
+        $product = $this->searchCart();
+        $_SESSION["qty"] -= $product["quantity"];
+        unset($_SESSION["cart"][$product["name"]]);
+        header("location:index.php?controller=Order&action=cart");
     }
 }
