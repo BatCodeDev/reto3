@@ -4,3 +4,11 @@
 .card img{
   cursor: pointer;
 }
+#removeFromCart{
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+.form-control:disabled{
+  background: white !important;
+}
