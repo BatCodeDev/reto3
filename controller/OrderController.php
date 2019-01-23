@@ -23,9 +23,28 @@ class OrderController extends GenericController {
             "listProduct"=>$_SESSION["qty"]
         ));
     }
+    function setAll($order){
+        $order =  new Order($this->connection);
+        $order->setCommentary($_POST["coment"]);
+        $order->setUserName($_POST["name"]);
+        $order->setUserSurname($_POST["surname"]);
+        $order->setUserTlfo($_POST["tlfo"]);
+        $order->setUserEmail($_POST["email"]);
+        return $order;
+    }
     public function insert(){
         if($_SESSION["qty"] == 0){
-            echo 1;
+            echo "0";
+        }else{
+            $order = $this->setAll(new Order($this->connection));
+            $ok = $order->insertOrder();
+            if ($ok != 0){
+                $_SESSION["qty"] = 0;
+                $_SESSION["cart"] = null;
+                echo "1";
+            }else{
+                echo "2";
+            }
         }
     }
 }
