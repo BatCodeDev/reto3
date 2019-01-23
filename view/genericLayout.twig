@@ -22,9 +22,9 @@
                 <li class="nav-item {{ activate }}">
                     <a class="nav-link" href="index.php?controller=Product&action=toProducts">Platos <span class="sr-only">(current)</span></a>
                 </li>
-                <button type="button" class="btn btn-primary">
-                  Carrito <span class="badge badge-light">{{ listProduct}}</span>
-                </button>          
+                <a href="index.php?controller=Order&action=cart" class="btn btn-primary">
+                  Carrito <span id="cartButtonQty" class="badge badge-light">{{ listProduct }}</span>
+                </a>
                 <li class="nav-item">
                     {% if user != null %}
                     <li class="nav-item dropdown">

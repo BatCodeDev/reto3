@@ -15,14 +15,6 @@ class ProductController extends GenericController {
     public function toProducts(){
         $id = null;
         $user = null;
-        $listProduct = 0;
-        if (isset($_SESSION["cart"])){
-            $quantity = 0;
-            foreach ($_SESSION["cart"] as $product) {
-                $quantity = $quantity + $product["quantity"];
-            }
-            $listProduct = $quantity;
-        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -33,7 +25,7 @@ class ProductController extends GenericController {
             "activate"=>"active",
             "id"=>$id,
             "user"=>$user,
-            "listProduct" => $listProduct
+            "listProduct" => $_SESSION["qty"]
         ));
     }
     public function setAll($product){
@@ -76,14 +68,60 @@ class ProductController extends GenericController {
         if (isset($_SESSION["cart"])) {
             if (isset($_SESSION["cart"][$_POST["nameProduct"]])) {
                 $quant = $_SESSION["cart"][$_POST["nameProduct"]]["quantity"];
-                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);  
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => $quant+1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
             }else{
-                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]); 
+                $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
             }
         }else{
-            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]); 
+            $_SESSION["cart"][$_POST["nameProduct"]] = array("quantity" => 1, "id" => $_POST["idProduct"] , "name" => $_POST["nameProduct"], "prize" => $_POST["prizeProduct"], "img" => $_POST["imgProduct"]);
             
         }
+        $quantity = 0;
+        foreach ($_SESSION["cart"] as $product) {
+            $quantity = $quantity + $product["quantity"];
+            $_SESSION["qty"] = $quantity;
+        }
         echo json_encode($_SESSION["cart"]);
+    }
+    public function searchCart(){
+        foreach ($_SESSION["cart"] as $product) {
+            if(intval($product["id"]) == $_GET["idProduct"])
+                return $product;
+        }
+    }
+    public function addQtyCart(){
+        $product = $this->searchCart();
+        $_SESSION["qty"]++;
+        $_SESSION["cart"][$product["name"]]["quantity"]++;
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "total"=>$_SESSION["qty"],
+                "id"=>$_GET["idProduct"],
+                "op"=>"+"
+            ]
+        );
+
+    }
+    public function removeQtyCart(){
+        $product = $this->searchCart();
+        if($product["quantity"] != 1) {
+            $_SESSION["qty"]--;
+            $_SESSION["cart"][$product["name"]]["quantity"]--;
+        }
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "total"=>$_SESSION["qty"],
+                "id"=>$_GET["idProduct"],
+                "op"=>"-"
+            ]
+        );
+    }
+    public function delete(){
+        $product = $this->searchCart();
+        $_SESSION["qty"] -= $product["quantity"];
+        unset($_SESSION["cart"][$product["name"]]);
+        header("location:index.php?controller=Order&action=cart");
     }
 }
