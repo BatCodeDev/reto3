@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2019 a las 10:00:42
+-- Tiempo de generación: 23-01-2019 a las 12:55:42
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -59,18 +59,33 @@ CREATE TABLE `category` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `order`
+-- Estructura de tabla para la tabla `clientorder`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE `clientorder` (
   `id` int(11) NOT NULL,
   `commentary` varchar(255) NOT NULL,
   `date` varchar(20) NOT NULL,
   `client_name` varchar(30) NOT NULL,
   `client_surname` varchar(30) NOT NULL,
   `client_number` varchar(30) NOT NULL,
-  `client_email` varchar(30) NOT NULL
+  `client_email` varchar(30) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clientorder`
+--
+
+INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_surname`, `client_number`, `client_email`, `status`) VALUES
+(2, 'aa', '2019-01-23 12:21:01', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(3, 'Hola como estamos', '2019-01-23 12:22:46', 'Alejandro', 'Diaz de Otalora', '987654321', 'alexddo122@gmail.com', 'ORDERED'),
+(4, 'aa', '2019-01-23 12:31:59', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(5, 'hola', '2019-01-23 12:34:10', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED');
 
 -- --------------------------------------------------------
 
@@ -80,8 +95,25 @@ CREATE TABLE `order` (
 
 CREATE TABLE `orderproduct` (
   `idOrder` int(5) NOT NULL,
-  `idProduct` int(5) NOT NULL
+  `idProduct` int(5) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `orderproduct`
+--
+
+INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
+(2, 2, 2),
+(2, 3, 4),
+(3, 2, 4),
+(3, 3, 4),
+(4, 2, 1),
+(5, 2, 1),
+(6, 2, 1),
+(7, 2, 1),
+(8, 2, 1),
+(9, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -135,9 +167,9 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `order`
+-- Indices de la tabla `clientorder`
 --
-ALTER TABLE `order`
+ALTER TABLE `clientorder`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -177,10 +209,10 @@ ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `order`
+-- AUTO_INCREMENT de la tabla `clientorder`
 --
-ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `clientorder`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
@@ -196,7 +228,7 @@ ALTER TABLE `product`
 -- Filtros para la tabla `orderproduct`
 --
 ALTER TABLE `orderproduct`
-  ADD CONSTRAINT `fk_order_orderProduct` FOREIGN KEY (`idOrder`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `fk_order_orderProduct` FOREIGN KEY (`idOrder`) REFERENCES `clientorder` (`id`),
   ADD CONSTRAINT `fk_product_orderProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`);
 
 --

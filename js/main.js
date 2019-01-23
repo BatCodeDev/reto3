@@ -28,9 +28,9 @@ function ajax_listen(idForm, target, action){
 }
 let reloadCart = function (data) {
     data = JSON.parse(data);
-    if (data !== "0"){
+    if (data.total+1 !== 1){
         $("#addQty"+data.id).html(data.val);
-        $("#cartButtonQty").html(parseInt($("#cartButtonQty").html()) + 1);
+        $("#cartButtonQty").html(data.total);
         $("#cartInputQty"+data.id).val(data.val);
         let r = parseFloat($("#prize"+data.id).html());
         $(".result"+data.id).html(Math.round( (parseInt(data.val) * r) * 10) / 10);
@@ -45,10 +45,25 @@ let reloadCart = function (data) {
     }
 }
 let errorCart = function (data) {
-    if (data == 1){
-        $("#orderMsg").show();
-    }else{
-
+    switch (data){
+        case "0":
+            $("#orderMsg span").html(" No hay ningun producto seleccionado");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
+        case "1":
+            $("#orderMsg span").html(" Pedido realizado correctamente");
+            $("#orderMsg").addClass("alert alert-success");
+            $("#orderMsg i").addClass("fas fa-check-circle");
+            $("#orderMsg").show();
+            break;
+        case "2":
+            $("#orderMsg span").html(" No se ha podido realizar el pedido");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
     }
 }
 let errorLogin = function (data) {

@@ -96,9 +96,12 @@ class ProductController extends GenericController {
         echo json_encode(
             [
                 "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
-                "id"=>$_GET["idProduct"]
+                "total"=>$_SESSION["qty"],
+                "id"=>$_GET["idProduct"],
+                "op"=>"+"
             ]
         );
+
     }
     public function removeQtyCart(){
         $product = $this->searchCart();
@@ -109,7 +112,9 @@ class ProductController extends GenericController {
         echo json_encode(
             [
                 "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
-                "id"=>$_GET["idProduct"]
+                "total"=>$_SESSION["qty"],
+                "id"=>$_GET["idProduct"],
+                "op"=>"-"
             ]
         );
     }
