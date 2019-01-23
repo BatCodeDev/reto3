@@ -41,4 +41,24 @@ class Category extends Generic{
             "name"=>$name
         ));
     }
+
+    public function getAll()
+    {
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM category"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
+
+    public function getSearch($name)
+    {
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM category WHERE name LIKE %:name% ORDER BY name"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+        return $res->fetchAll();
+    }
 }
