@@ -83,18 +83,40 @@ class ProductController extends GenericController {
         }
         echo json_encode($_SESSION["cart"]);
     }
-    public function delete(){
+    public function searchCart(){
         foreach ($_SESSION["cart"] as $product) {
-            if(intval($product["id"]) == $_GET["idProduct"]){
-                if(intval($product["quantity"]) != 1){
-                    $_SESSION["cart"][$product["name"]]["quantity"]--;
-                    $_SESSION["qty"]--;
-                }else{
-                    $_SESSION["qty"]--;
-                    unset($_SESSION["cart"][$product["name"]]);
-                }
-            }
+            if(intval($product["id"]) == $_GET["idProduct"])
+                return $product;
         }
+    }
+    public function addQtyCart(){
+        $product = $this->searchCart();
+        $_SESSION["qty"]++;
+        $_SESSION["cart"][$product["name"]]["quantity"]++;
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "id"=>$_GET["idProduct"]
+            ]
+        );
+    }
+    public function removeQtyCart(){
+        $product = $this->searchCart();
+        if($product["quantity"] != 1) {
+            $_SESSION["qty"]--;
+            $_SESSION["cart"][$product["name"]]["quantity"]--;
+        }
+        echo json_encode(
+            [
+                "val"=>$_SESSION["cart"][$product["name"]]["quantity"],
+                "id"=>$_GET["idProduct"]
+            ]
+        );
+    }
+    public function delete(){
+        $product = $this->searchCart();
+        $_SESSION["qty"] -= $product["quantity"];
+        unset($_SESSION["cart"][$product["name"]]);
         header("location:index.php?controller=Order&action=cart");
     }
 }
