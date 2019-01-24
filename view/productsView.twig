@@ -14,7 +14,7 @@
             <br>
             <form class="form-inline my-2 my-lg-0" id="searchForm" onsubmit="return ajax_listen(this.id, 'index.php?controller=Category&action=searchP', searchProducts)">
                 <select class="selectpicker  show-menu-arrow form-control" name="category" id="category">
-                    <option>Todas las categorias</option>
+                    <option value="0">Todas las categorias</option>
                     {% for element in categories %}
                         <option value="{{ element.id }}">{{ element.name }}</option>
                     {% endfor %}
@@ -51,17 +51,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="resultSearch">
                 {% if search is defined %}
-                    {% for product in search %}
-                        <div class="card col-md-4 col-6 p-0" style="width: 18rem;">
-                            <img id="{{ product.id }}" src="img/productImg/{{ product.img }}" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    {{ product.name }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
+
                 {% else %}
                     {% for product in products %}
                         <div class="card col-md-4 col-6 p-0" style="width: 18rem;">

@@ -1,0 +1,9 @@
+{% for product in search %}
+    <div class="card col-md-4 col-6 p-0" style="width: 18rem;">
+        <img id="{{ product.id }}" src="img/productImg/{{ product.img }}" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
+        <div class="card-body">
+            <p class="card-text">
+                {{ product.name }}</p>
+        </div>
+    </div>
+{% endfor %}
