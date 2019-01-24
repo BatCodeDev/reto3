@@ -28,6 +28,21 @@ class ProductController extends GenericController {
             "listProduct" => $_SESSION["qty"]
         ));
     }
+    public function allProducts(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
+        $product = new Product($this->connection);
+        $this->view("adminProducts", array(
+            "products"=>$product->getAll(),
+            "id"=>$id,
+            "user"=>$user,
+            "listProduct" => $_SESSION["qty"]
+        ));
+    }
     public function setAll($product){
         $product->setName($_POST["name"]);
         $product->setDescription($_POST["descr"]);
@@ -36,19 +51,25 @@ class ProductController extends GenericController {
     }
     public function insert(){
         $product = $this->setAll(new Product($this->connection));
-        if ($_FILES["img"]["error"] > 0){
-            echo "Error: " . $_FILES["file"]["error"] . "<br />";
+        $header = "location:index.php?controller=product&action=toProducts";
+        $extension = explode("/", $_FILES["img"]["type"])[1];
+        if (isset($_GET["mode"])){
+            //$img = uniqid().'.'.$extension;
+            $url = "img/productImg/".$_POST["prevImg"];
+            //$url = "img/productImg/".$_POST["prevImg"];
+            $product->setImg($_POST["prevImg"]);
+            $product->updateProduct($_GET["idProduct"]);
+            $ok = 1;
+            $header = "location:index.php?controller=Product&action=allProducts";
         }else{
-            $extension = explode("/", $_FILES["img"]["type"])[1];
-            $img = uniqid().'.'.$extension;
+            $img = $_POST["name"].'.'.$extension;
             $url = "img/productImg/".$img;
             $product->setImg($img);
             $ok = $product->insertProduct();
-
-            if($ok != 0)
-                move_uploaded_file($_FILES["img"]["tmp_name"], $url);
-            header("location:index.php?controller=product&action=toProducts");
         }
+        if($ok != 0)
+            move_uploaded_file($_FILES["img"]["tmp_name"], $url);
+        header($header);
     }
 
     public function addProduct(){
@@ -60,9 +81,14 @@ class ProductController extends GenericController {
             "user"=>$user
         ));
     }
-    public function modal(){
-        $product = new Product($this->connection);
-        echo json_encode($product->selectById($_GET["idProduct"]));
+    public function details(){
+        if(isset($_GET["idProduct"])){
+            $product = new Product($this->connection);
+            $this->view("productDetails",array(
+                "title"=>"Detalles de producto",
+                "product"=>$product->searchById($_GET["idProduct"])[0]
+            ));
+        }
     }
     public function addCart(){
         if (isset($_SESSION["cart"])) {

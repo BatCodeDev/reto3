@@ -66,6 +66,15 @@ class Product extends Generic{
             "img"=>$this->img
         ];
     }
+    public function searchById($id){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product WHERE ID = :id"
+        );
+        $res->execute(array(
+            "id"=>$id
+        ));
+        return $res->fetchAll();
+    }
     public function insertProduct(){
         $res = parent::getConnection()->prepare(
             "INSERT INTO product (name, description, prize, img) VALUES (:name, :description, :prize, :img)"
@@ -76,17 +85,13 @@ class Product extends Generic{
         return $lastid;
     }
 
-    public function updateProduct($name, $description, $prize){
+    public function updateProduct($id){
         $res = parent::getConnection()->prepare(
-            "UPDATE product SET name = :name, description = :description, prize = :prize WHERE name = :name"
+            "UPDATE product SET name = :name, description = :description, prize = :prize, img = :img WHERE id = ".$id
         );
-        $res->execute(array(
-            "name"=>$name,
-            "description"=>$description,
-            "prize"=>$prize
-        ));
+        $res->execute($this->data());
+        $this->connection = null;
     }
-
     public function deleteProduct($name){
         $res = parent::getConnection()->prepare(
             "DELETE FROM product WHERE name = :name"

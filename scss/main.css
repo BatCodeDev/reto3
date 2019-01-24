@@ -16,6 +16,14 @@
   background: white !important;
 }
 
+#dtMaterialDesignExample td, #dtMaterialDesignExample th {
+  text-align: center;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+  background-color: #82005E;
+}
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

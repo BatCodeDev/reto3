@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="mdb/css/addons/datatables.css">
     <script src="bootstrap/bootstrap.js"></script>
     <script src="js/main.js"></script>
+    <link rel="stylesheet" href="scss/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="scss/main.css">
     <title>{{ user }}</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.php">BatFood</a>
@@ -30,26 +31,14 @@
                             {{ user }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="index.php?controller=Product&action=addProduct">Añadir plato</a>
+                            <a class="dropdown-item" href="index.php?controller=Product&action=allProducts">Ver todos los platos</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.php?controller=User&action=toManageAdmins">Gestionar administradores</a>
                             <a class="dropdown-item" href="index.php?controller=User&action=logOut">Cerrar session</a>
                         </div>
                     </li>
-                </li>
                     {% endif %}
-                {% if user != null %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Acciones
-                    </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="index.php?controller=Product&action=addProduct">Añadir plato</a>
-                            <a class="dropdown-item" href="index.php?controller=User&action=toManageAdmins">Gestionar administradores</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                </li>
-                {% endif %}
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
@@ -63,4 +52,6 @@
         {% block content %}{% endblock %}
     </div>
 </body>
+   <script type="text/javascript" src="mdb/js/addons/datatables.js"></script>
+   <script type="text/javascript" src="js/modal.js"></script>
 </html>

@@ -13,43 +13,55 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div id="modelContainter"></div>
-            <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="ProductModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form id="product" onsubmit="return ajax_listen(this.id, 'index.php?controller=Product&action=addCart', addCart)">
-                            
-                            <div class="modal-header">
-                                <h5 name="nameProduct" class="modal-title" id="ProductModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div id="data">
-                                <input type="hidden" name="idProduct">
-                                <input type="hidden" name="nameProduct">
-                                <input type="hidden" name="prizeProduct">
-                                <input type="hidden" name="imgProduct">
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" id="buy"> <i class="fas fa-cart-plus"></i> Añadir al carro</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 {% for product in products %}
                     <div class="card col-md-4 col-6 p-0" style="width: 18rem;">
-                        <img id="{{ product.id }}" src="img/productImg/{{ product.img }}" class="card-img-top" alt="..." onclick="modal(this.id)" data-toggle="modal" data-target="#ProductModal">
+                        <img id="{{ product.id }}" src="img/productImg/{{ product.img }}" class="card-img-top" alt="..." {#onclick="modal(this.id)"#}
+                             data-toggle="modal" data-target="#ProductModal"
+                             data-id="{{ product.id }}"
+                             data-name="{{ product.name }}"
+                             data-prize="{{ product.prize }}"
+                             data-img="{{ product.img }}"
+                             data-desc="{{ product.description }}">
                         <div class="card-body">
                             <p class="card-text">
                             {{ product.name }}</p>
                         </div>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+        <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="ProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="product" onsubmit="return ajax_listen(this.id, 'index.php?controller=Product&action=addCart', addCart)">
+                        <div class="modal-header">
+                            <h5 name="nameProduct" class="modal-title" id="ProductModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="data">
+                            <input type="hidden" name="idProduct">
+                            <input type="hidden" name="nameProduct">
+                            <input type="hidden" name="prizeProduct">
+                            <input type="hidden" name="imgProduct">
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div id="pImg" class="col-3">
+                                    <img height="90">
+                                </div>
+                                <div id="pDesc" class="col-9"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div id="pPrize" class="col-md-6"></div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" id="buy"> <i class="fas fa-cart-plus"></i> Añadir al carro</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
