@@ -1,15 +1,19 @@
-function modal(id) {
-    $.get("index.php?controller=Product&action=modal&idProduct="+id, function (data) {
-        let modalData = JSON.parse(data);
-        $("#ProductModalLabel").html(modalData.name);
-        $("#ProductModal .modal-body").html(modalData.description);
-
-        $("input[name='idProduct']").val(modalData.id);
-        $("input[name='nameProduct']").val(modalData.name);
-        $("input[name='prizeProduct']").val(modalData.prize);
-        $("input[name='imgProduct']").val(modalData.img);
+$(document).ready(function () {
+    $('#dtMaterialDesignExample').DataTable();
+    $('#dtMaterialDesignExample_wrapper > div').addClass("col-10 offset-1")
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+        $('input').attr("placeholder", "Buscar");
+        $('input').css("margin-top", "1.2rem");
+        $('input').removeClass('form-control-sm');
     });
-}
+    $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+    $('#dtMaterialDesignExample_wrapper select').removeClass(
+        'custom-select custom-select-sm form-control form-control-sm');
+    $('#dtMaterialDesignExample_wrapper select').addClass('custom-select');
+    $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+});
 function ajax_listen(idForm, target, action){
     var form_data = "";
     if (idForm !== "")
