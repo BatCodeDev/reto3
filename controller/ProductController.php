@@ -52,11 +52,11 @@ class ProductController extends GenericController {
     public function insert(){
         $product = $this->setAll(new Product($this->connection));
         $header = "location:index.php?controller=product&action=toProducts";
-        $extension = explode("/", $_FILES["img"]["type"])[1];
+        if(isset($_FILES)){
+            $extension = explode("/", $_FILES["img"]["type"])[1];
+        }
         if (isset($_GET["mode"])){
-            //$img = uniqid().'.'.$extension;
             $url = "img/productImg/".$_POST["prevImg"];
-            //$url = "img/productImg/".$_POST["prevImg"];
             $product->setImg($_POST["prevImg"]);
             $product->updateProduct($_GET["idProduct"]);
             $ok = 1;
