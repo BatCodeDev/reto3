@@ -21,12 +21,16 @@ class CategoryController extends GenericController {
     }
 
     public function searchP(){
-
-        if(isset($_POST['category']))
+        if($_POST['category']!=0)
         {
             if(isset($_POST['search']))
             {
-
+                $search=new Category($this->connection);
+                $search=$search->getSearchCat($_POST['search'],$_POST['category']);
+                $this->view("search", array(
+                    "title"=>"Resultados busqueda",
+                    "search"=>$search
+                ));
             }
         }
         else
@@ -34,29 +38,15 @@ class CategoryController extends GenericController {
             if(isset($_POST['search']))
             {
                 $search=new Category($this->connection);
-                $search=$search->getSearch();
-                $this->view("products", array(
-                    "title"=>"Restaurante",
+                $search=$search->getSearch($_POST['search']);
+                $this->view("search", array(
+                    "title"=>"Resultados busqueda",
                     "search"=>$search
                 ));
             }
         }
 
-        if(isset($_POST["user"], $_POST["pass"])){
-            $user = new User($this->connection);
-            $dbuser = $user->selectByName($_POST["user"]);
-            if($dbuser == null){
-                echo 0;
-            }else{
-                if($dbuser[0]["pass"] === $_POST["pass"]){
-                    $_SESSION["id"] = $dbuser[0]["id"];
-                    $_SESSION["user"] = $dbuser[0]["user"];
-                    echo 1;
-                }else{
-                    echo 0;
-                }
-            }
-        }
+
     }
 
 }
