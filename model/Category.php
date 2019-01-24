@@ -1,7 +1,7 @@
 <?php
 require_once "Generic.php";
 class Category extends Generic{
-    private $name;
+    private $name,$id;
 
     public function __construct($connection){
         parent::__construct($connection);
@@ -14,6 +14,17 @@ class Category extends Generic{
     public function setName($name){
         $this->name = $name;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     public function insertCategory($name){
         $res = parent::getConnection()->prepare(
@@ -54,11 +65,17 @@ class Category extends Generic{
     public function getSearch($name)
     {
         $res = parent::getConnection()->prepare(
-            "SELECT * FROM category WHERE name LIKE %:name% ORDER BY name"
+            "SELECT * FROM product WHERE name LIKE '%".$name."%' ORDER BY name"
         );
-        $res->execute(array(
-            "name"=>$name
-        ));
+        $res->execute();
+        return $res->fetchAll();
+    }
+    public function getSearchCat($name,$id)
+    {
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product WHERE name LIKE '%".$name."%' and id= (SELECT idProduct FROM productcategory WHERE idCategory=".$id.") ORDER BY name"
+        );
+        $res->execute();
         return $res->fetchAll();
     }
 }
