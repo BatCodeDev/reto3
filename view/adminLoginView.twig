@@ -1,6 +1,6 @@
 {% extends "genericLayout.twig"%}
 {% block content %}
-    <form id="loginForm" class="col-6 offset-3" onsubmit="return ajax_listen(this.id, 'index.php?controller=User&action=loginValidate', errorLogin, true)">
+    <form id="loginForm" class="col-md-6 offset-md-3" onsubmit="return ajax_listen(this.id, 'index.php?controller=User&action=loginValidate', errorLogin)">
         <div class="modal-body">
             <div class="form-group">
                 <label for="user">Usuario</label>

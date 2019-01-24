@@ -1,3 +1,24 @@
-#msg{
+#msg, #orderMsg{
   display: none;
 }
+.card img{
+  cursor: pointer;
+}
+#removeFromCart{
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+.form-control:disabled{
+  background: white !important;
+}
+#dtMaterialDesignExample td, #dtMaterialDesignExample th{
+  text-align: center;
+}
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus{
+  background-color: #82005E;
+}
+$primary: #82005E;
+$info: #007bff;
+$component-focus-bg: #82005E;
+@import "../bootstrap/scss/bootstrap";
