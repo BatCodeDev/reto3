@@ -47,4 +47,13 @@ class OrderController extends GenericController {
             }
         }
     }
+    public function allOrders(){
+        $order = new Order($this->connection);
+        $this->view("adminOrders", array(
+            "orders"=>$order->getAll(),
+            "id"=>$_SESSION["id"],
+            "user"=>$_SESSION["user"],
+            "listProduct" => $_SESSION["qty"]
+        ));
+    }
 }

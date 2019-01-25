@@ -137,7 +137,19 @@ INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`) VALUES
 (2, 'plato1', 'nada', 2.3, '5c46cf6baa3b8.png'),
 (3, 'plato2', 'nada2', 3.4, '5c46d10d74718.png'),
 (4, 'plato3', 'nada3', 3.4, '5c46da83b6293.png'),
-(5, 'plato4', 'nada4', 4.3, '5c46daef26c06.jpeg');
+(5, 'plato4', 'nada4', 4.3, '5c46daef26c06.jpeg'),
+(6, 'plato5', 'nadaaa', 2.3, '5c499a97c7912.jpeg'),
+(7, 'corequetas', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(8, 'pasta', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(9, 'paella', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(10, 'arroz', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(11, 'nachos', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(12, 'totilla', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(13, 'galletas', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(14, 'pate', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(15, 'helado', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(16, 'pollo', 'nada', 2.3, 'pollo.jpeg'),
+(17, 'espagueti', 'nada', 4.5, 'espagueti.jpeg');
 
 -- --------------------------------------------------------
 
