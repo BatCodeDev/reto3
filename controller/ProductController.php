@@ -46,7 +46,9 @@ class ProductController extends GenericController {
     public function insert(){
         $product = $this->setAll(new Product($this->connection));
         $header = "location:index.php?controller=product&action=toProducts";
-        $extension = explode("/", $_FILES["img"]["type"])[1];
+        if(isset($_FILES)){
+            $extension = explode("/", $_FILES["img"]["type"])[1];
+        }
         if (isset($_GET["mode"])){
             $url = "img/productImg/".$_POST["prevImg"];
             $product->setImg($_POST["prevImg"]);
