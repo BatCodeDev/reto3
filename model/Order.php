@@ -64,6 +64,13 @@ class Order extends Generic{
             "status"=>"ORDERED"
         );
     }
+    public function getAll(){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM clientorder"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
     public function insertOrder(){
         $res = parent::getConnection()->prepare(
             "INSERT INTO clientOrder (commentary, date, client_name, client_surname, client_number, client_email, status) 
