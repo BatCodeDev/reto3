@@ -8,6 +8,7 @@ class ProductController extends GenericController {
     public function __construct(){
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
+        require_once __DIR__."/../model/Category.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
@@ -19,14 +20,48 @@ class ProductController extends GenericController {
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
         }
+        $categories=new Category ($this->connection);
+        $categories=$categories->getAll();
         $product = new Product($this->connection);
-        $this->view("products", array(
-            "products"=>$product->getAll(),
-            "activate"=>"active",
-            "id"=>$id,
-            "user"=>$user,
-            "listProduct" => $_SESSION["qty"]
-        ));
+        $search = new Category($this->connection);
+        if(isset($_POST['search'])) {
+            if ($_POST['category'] != 0) {
+
+                $search = $search->getSearchCat($_POST['search'], $_POST['category']);
+                $this->view("products", array(
+                    "products" => $search,
+                    "activate" => "active",
+                    "id" => $id,
+                    "user" => $user,
+                    "listProduct" => $_SESSION["qty"],
+                    "categories" => $categories
+                ));
+
+            } else {
+                $search = $search->getSearch($_POST['search']);
+
+                $this->view("products", array(
+                    "products" => $search,
+                    "activate" => "active",
+                    "id" => $id,
+                    "user" => $user,
+                    "listProduct" => $_SESSION["qty"],
+                    "categories" => $categories
+                ));
+            }
+        }
+        else
+        {
+            $product=$product->getAll();
+            $this->view("products", array(
+                "products" => $product,
+                "activate" => "active",
+                "id" => $id,
+                "user" => $user,
+                "listProduct" => $_SESSION["qty"],
+                "categories" => $categories
+            ));
+        }
     }
     public function allProducts(){
         $product = new Product($this->connection);

@@ -90,3 +90,7 @@ let errorLogin = function (data) {
 let addCart = function (data) {
     location.reload();
 }
+
+let searchProducts=function (data) {
+    $('#resultSearch').html(data);
+}
