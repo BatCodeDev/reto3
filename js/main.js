@@ -55,9 +55,11 @@ function ajax_listen(idForm, target, action, send_data){
     return false;
 }
 
+
 let multiDelete = function () {
     window.location.reload();
 };
+
 
 let reloadCart = function (data) {
     data = JSON.parse(data);
@@ -119,12 +121,6 @@ let errorLogin = function (data) {
 let addCart = function (data) {
     location.reload();
 }
-
 let searchProducts=function (data) {
     $('#resultSearch').html(data);
 }
-
-
-
-
-
