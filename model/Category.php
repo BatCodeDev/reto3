@@ -25,6 +25,14 @@ class Category extends Generic{
         $this->id = $id;
     }
 
+    public function getAll()
+    {
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM category"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
 
     public function insertCategory($name){
         $res = parent::getConnection()->prepare(
@@ -53,15 +61,6 @@ class Category extends Generic{
         ));
     }
 
-    public function getAll()
-    {
-        $res = parent::getConnection()->prepare(
-            "SELECT * FROM category"
-        );
-        $res->execute();
-        return $res->fetchAll();
-    }
-
     public function getSearch($name)
     {
         $res = parent::getConnection()->prepare(
@@ -72,6 +71,7 @@ class Category extends Generic{
     }
     public function getSearchCat($name,$id)
     {
+        //var_dump(die($id));
         $res = parent::getConnection()->prepare(
             "SELECT * FROM product WHERE name LIKE '%".$name."%' and id= (SELECT idProduct FROM productcategory WHERE idCategory=".$id.") ORDER BY name"
         );

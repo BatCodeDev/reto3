@@ -10,6 +10,7 @@ class CategoryController extends GenericController {
         //require_once __DIR__."/../model/Bodega.php";
         //require_once __DIR__."/../model/Vino.php";
         require_once __DIR__."/../model/Category.php";
+
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }

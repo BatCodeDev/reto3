@@ -5,11 +5,11 @@
             {% set total = 0 %}
             {% for p in cart %}
                 <div class="row card d-flex flex-row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <img class="card-img-top" src="img/productImg/{{ p.img }}" alt="Card image cap">
                     </div>
-                    <div class="row col-md-9 card-body align-items-center">
-                        <div class="col-md-3">{{ p.name }}</div>
+                    <div class="row col-md-10 card-body align-items-center">
+                        <div class="col-md-3">{{ p.name }} id: {{ p.id }}</div>
                         <div class="col-md-3"><span id="addQty{{ p.id }}">{{ p.quantity }}</span> &times; <span id="prize{{ p.id }}">{{ p.prize }}</span> €</div>
                         <div class="col-md-2"><span class="result{{ p.id }} sum">{{ p.quantity * p.prize }}</span> €</div>
                         <div class="col-md-4">
@@ -58,11 +58,15 @@
                     <input id="email" name="email" type="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div id="orderMsg" class="alert alert-danger"><i class="fas fa-times-circle"></i> No hay ningun producto seleccionado</div>
+                    <label for="coment">Commentario</label>
+                    <textarea id="coment" name="coment" type="coment" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <a href="index.php?controller=Product&action=toProducts" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Volver</a>
-                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-check"></i> Finalizar</button>
+                    <div id="orderMsg"><i></i><span></span></div>
+                </div>
+                <div class="form-group">
+                    <a href="index.php?controller=Product&action=toProducts" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+                    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-check"></i> Finalizar</button>
                 </div>
             </form>
         </div>
