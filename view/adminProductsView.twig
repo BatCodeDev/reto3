@@ -1,38 +1,46 @@
 {% extends "genericLayout.twig" %}
 {% block content %}
+    <script>
+
+    </script>
     <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th class="th-sm">Imagen</th>
-            <th class="th-sm">Name</th>
-            <th class="th-sm">Descripcion</th>
-            <th class="th-sm">Precio</th>
+            <th class="d-lg-table-cell d-none"></th>
+            <th class="th-sm d-lg-table-cell d-none">Imagen</th>
+            <th class="th-sm">Nombre</th>
+            <th class="th-sm d-lg-table-cell d-none">Descripcion</th>
+            <th class="th-sm d-lg-table-cell d-none">Precio</th>
             <th class="th-sm">Acciones</th>
         </tr>
         </thead>
         <tbody>
         {% for p in products %}
             <tr>
-                <td id="p-0 w-20">
-                    <img src="img/productImg/{{ p.img }}" height="60">
+                <td class="d-lg-table-cell d-none">
+                    <input type="checkbox" class="form-control" onclick="trashCart('{{ p.id }}')">
+                </td>
+                <td class="p-0 w-20 d-lg-table-cell d-none">
+                    <img src="img/productImg/{{ p.img }}" height="60" class="d-lg-table-cell d-none">
                 </td>
                 <td>{{ p.name }}</td>
-                <td>{{ p.description }}</td>
-                <td>{{ p.prize }}</td>
+                <td class="d-lg-table-cell d-none">{{ p.description }}</td>
+                <td class="d-lg-table-cell d-none">{{ p.prize }}</td>
                 <td>
-                    <a href="index.php?controller=Product&action=details&idProduct={{ p.id }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Editar</a>
-                    <a href="index.php?controller=Product&action=deleteProduct&idProduct={{ p.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Eliminar</a>
+                    <a href="index.php?controller=Product&action=details&idProduct={{ p.id }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> <span class="d-lg-inline d-none">Editar</span></a>
+                    <a id="pDelete{{ p.id }}" href="index.php?controller=Product&action=deleteProduct&idProduct={{ p.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> <span class="d-lg-inline d-none"></span></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
         <tfoot>
         <tr>
-            <th>Imagen</th>
-            <th>Name</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Acciones</th>
+            <th class="d-lg-table-cell d-none"></th>
+            <th class="d-lg-table-cell d-none">Imagen</th>
+            <th>Nombre</th>
+            <th class="d-lg-table-cell d-none">Descripcion</th>
+            <th class="d-lg-table-cell d-none">Precio</th>
+            <th><button onclick="deleteSelect()" class="btn btn-outline-danger d-lg-table-cell d-none"><i class="fas fa-trash"></i> Eliminar seleccion</button></th>
         </tr>
         </tfoot>
     </table>
