@@ -1,10 +1,12 @@
 $(document).ready(function () {
     $('#dtMaterialDesignExample').DataTable();
+
     $('#dtMaterialDesignExample_wrapper > div').addClass("col-12");
     $('#dtMaterialDesignExample_wrapper > div').css("margin","0");
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
         $('input').attr("id", "productSearch");
+
         $('input').css("margin-top", "1.2rem");
         $('input').removeClass('form-control-sm');
     });
@@ -16,6 +18,7 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
 });
+
 var deleteCart = [];
 function trashCart(id) {
     if(deleteCart.includes(id)){
@@ -38,6 +41,7 @@ function ajax_listen(idForm, target, action, send_data){
         if (send_data !== "" || send_data !== undefined){
             form_data = send_data;
         }
+
     $.ajax({
         type: "POST",
         url: target,
@@ -50,9 +54,11 @@ function ajax_listen(idForm, target, action, send_data){
     });
     return false;
 }
+
 let multiDelete = function () {
     window.location.reload();
 };
+
 let reloadCart = function (data) {
     data = JSON.parse(data);
     if (data.total+1 !== 1){
@@ -113,7 +119,12 @@ let errorLogin = function (data) {
 let addCart = function (data) {
     location.reload();
 }
+
 let searchProducts=function (data) {
     $('#resultSearch').html(data);
 }
+
+
+
+
 
