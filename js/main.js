@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper > div').addClass("col-10 offset-1")
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
+        $('input').attr("id", "productSearch");
         $('input').css("margin-top", "1.2rem");
         $('input').removeClass('form-control-sm');
     });
@@ -14,10 +15,28 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
 });
-function ajax_listen(idForm, target, action){
+var deleteCart = [];
+function trashCart(id) {
+    if(deleteCart.includes(id)){
+        deleteCart.splice(deleteCart.indexOf(id), 1);
+    }else{
+        deleteCart.push(id);
+    }
+}
+function deleteSelect() {
+    debugger;
+    let send_data = "";
+    send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
+    ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
+}
+function ajax_listen(idForm, target, action, send_data){
     var form_data = "";
     if (idForm !== "")
         form_data = $("#"+idForm).serialize();
+    else
+        if (send_data !== "" || send_data !== undefined){
+            form_data = send_data;
+        }
     $.ajax({
         type: "POST",
         url: target,
@@ -30,6 +49,9 @@ function ajax_listen(idForm, target, action){
     });
     return false;
 }
+let multiDelete = function () {
+    window.location.reload();
+};
 let reloadCart = function (data) {
     data = JSON.parse(data);
     if (data.total+1 !== 1){

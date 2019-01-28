@@ -45,7 +45,7 @@ class ProductController extends GenericController {
     }
     public function insert(){
         $product = $this->setAll(new Product($this->connection));
-        $header = "location:index.php?controller=product&action=toProducts";
+        $header = "location:index.php?controller=Product&action=toProducts";
         if(isset($_FILES)){
             $extension = explode("/", $_FILES["img"]["type"])[1];
         }
@@ -144,9 +144,19 @@ class ProductController extends GenericController {
         unset($_SESSION["cart"][$product["name"]]);
         header("location:index.php?controller=Order&action=cart");
     }
+
     public function deleteProduct(){
         $product = new Product($this->connection);
         $product->delete($_GET["idProduct"], "product");
         header("location:index.php?controller=Product&action=allProducts");
+    }
+    public function multiDeleteProduct(){
+        $data = json_decode($_POST["ids"]);
+        foreach ($data as $p){
+            echo $p;
+            $product = new Product($this->connection);
+            $product->delete($p, "product");
+        }
+        print_r($data);
     }
 }
