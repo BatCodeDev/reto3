@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('#dtMaterialDesignExample').DataTable();
-    $('#dtMaterialDesignExample_wrapper > div').addClass("col-10 offset-1")
+    $('#dtMaterialDesignExample_wrapper > div').addClass("col-12");
+    $('#dtMaterialDesignExample_wrapper > div').css("margin","0");
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
         $('input').attr("id", "productSearch");
