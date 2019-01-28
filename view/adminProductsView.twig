@@ -1,0 +1,39 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th class="th-sm">Imagen</th>
+            <th class="th-sm">Name</th>
+            <th class="th-sm">Descripcion</th>
+            <th class="th-sm">Precio</th>
+            <th class="th-sm">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in products %}
+            <tr>
+                <td id="p-0 w-20">
+                    <img src="img/productImg/{{ p.img }}" height="60">
+                </td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.prize }}</td>
+                <td>
+                    <a href="index.php?controller=Product&action=details&idProduct={{ p.id }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Editar</a>
+                    <a href="index.php?controller=Product&action=deleteProduct&idProduct={{ p.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Imagen</th>
+            <th>Name</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}
