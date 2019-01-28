@@ -12,8 +12,34 @@
   top: 4px;
 }
 
+#customNavBar {
+  flex-direction: row;
+}
+
+#customNavBar > li:first-of-type {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#customDropDown {
+  position: absolute !important;
+}
+
+#cart {
+  position: absolute;
+  right: 10px;
+}
+
 .form-control:disabled {
   background: white !important;
+}
+
+#dtMaterialDesignExample td, #dtMaterialDesignExample th {
+  text-align: center;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+  background-color: #82005E;
 }
 
 /*!

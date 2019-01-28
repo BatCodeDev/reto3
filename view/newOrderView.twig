@@ -14,11 +14,11 @@
                         <div class="col-md-2"><span class="result{{ p.id }} sum">{{ p.quantity * p.prize }}</span> €</div>
                         <div class="col-md-4">
                                 <div class="row justify-content-center">
-                                    <form onsubmit="return ajax_listen('','index.php?controller=product&action=addQtyCart&idProduct={{ p.id }}',reloadCart)">
+                                    <form onsubmit="return ajax_listen('','index.php?controller=Product&action=addQtyCart&idProduct={{ p.id }}',reloadCart)">
                                         <button type="submit" class="btn btn-outline-primary"><i class="fas fa-arrow-up"></i></button>
                                     </form>
                                     <input id="cartInputQty{{ p.id }}" type="text" class="form-control text-center w-25" value="{{ p.quantity }}" disabled>
-                                    <form onsubmit="return ajax_listen('', 'index.php?controller=product&action=removeQtyCart&idProduct={{ p.id }}', reloadCart)">
+                                    <form onsubmit="return ajax_listen('', 'index.php?controller=Product&action=removeQtyCart&idProduct={{ p.id }}', reloadCart)">
                                         <button type="submit" class="btn btn-outline-primary"><i class="fas fa-arrow-down"></i></button>
                                     </form>
                                 </div>
