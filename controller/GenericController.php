@@ -20,7 +20,7 @@ class GenericController{
         //die($name);
         $myfile = fopen("sendmailTest.js", "w");
         $txt = "var Sendgrid = require('sendgrid')(
-                process.env.SENDGRID_API_KEY || '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'
+                process.env.SENDGRID_API_KEY || ''
             );
             
             var request = Sendgrid.emptyRequest({
