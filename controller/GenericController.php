@@ -16,11 +16,10 @@ class GenericController{
         $twig = new Twig_Environment($loader);
         echo $twig->render($view."View.twig", $data);
     }
-    public function mail_send($name, $mail, $url){
-        //die($name);
-        $myfile = fopen("sendmailTest.js", "w");
+    public function mail_send($name, $mail, $url, $id){
+        $myfile = fopen("nodejs-compute/samples/send_mail.js", "w");
         $txt = "var Sendgrid = require('sendgrid')(
-                process.env.SENDGRID_API_KEY || ''
+                process.env.SENDGRID_API_KEY || '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'
             );
             
             var request = Sendgrid.emptyRequest({
@@ -30,7 +29,7 @@ class GenericController{
                     personalizations: [
                         {
                             to: [{email:'".$mail."'}],
-                            subject: 'Sendgrid test email from Node.js on Google Cloud Platform',
+                            subject: 'Nº de pedido: ".$id."',
                         },
                     ],
                     from: {email: 'batcodedev@gmail.com'},
@@ -42,8 +41,17 @@ class GenericController{
                         },
                     ],
                 },
+            });
+            Sendgrid.API(request, function(error, response) {
+              if (error) {
+                console.log('Mail not sent; see error message below.');
+              } else {
+                console.log('Mail sent successfully!');
+              }
+              console.log(response);
             });";
         fwrite($myfile, $txt);
         fclose($myfile);
+        exec("node nodejs-compute/samples/send_mail.js");
     }
 }

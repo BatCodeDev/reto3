@@ -43,7 +43,7 @@ class OrderController extends GenericController {
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
-                mail_send();
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
             }else{
                 echo "2";
             }
@@ -59,22 +59,9 @@ class OrderController extends GenericController {
         ));
     }
     public function confirmOrder(){
-        die($_GET["idOrder"]);
+        $order = new Order($this->connection);
         $this->view("orderConfirm", array(
             "title"=>"orderConfirm"
         ));
-    }
-    public function test(){
-        $res = exec("cd node");
-        $res3 = exec("ls");
-        $res2 = exec("node sendmail.js");
-        echo $res;
-        echo "<br>";
-        echo $res2;
-        echo "<br>";
-        echo $res3;
-    }
-    public function testMail(){
-        $this->mail_send("Alejandro", "alexddo122@gmail.com", "http://batcodedev.tk/confirm/2");
     }
 }
