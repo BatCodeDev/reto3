@@ -23,6 +23,16 @@ class OrderController extends GenericController {
             "listProduct"=>$_SESSION["qty"]
         ));
     }
+    public function allStatistics()
+    {
+        $product = new Order($this->connection);
+        $this->view("adminStatistics", array(
+            "title"=>'Platos mas vendidos',
+            "orders"=>$product->getProductCount(),
+            "id"=>$_SESSION["id"],
+            "user"=>$_SESSION["user"]
+        ));
+    }
     function setAll($order){
         $order =  new Order($this->connection);
         $order->setCommentary($_POST["coment"]);
