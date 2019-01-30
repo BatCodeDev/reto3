@@ -1,0 +1,8 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    {% for element in orders %}
+        <input type="hidden" class="products" name="product" value="{{ element.product }}" id="{{ element.idProduct }}">
+    {% endfor %}
+    {{ title }}
+    <div id="chart_div"></div>
+{% endblock %}
