@@ -101,7 +101,7 @@ let errorCart = function (data) {
             $("#orderMsg").show();
             break;
         case "1":
-            $("#orderMsg span").html(" Pedido realizado correctamente");
+            $("#orderMsg span").html(" Pedido realizado correctamente<br> En breves instantes recibira un mail de confirmacion");
             $("#orderMsg").addClass("alert alert-success");
             $("#orderMsg i").addClass("fas fa-check-circle");
             $("#orderMsg").show();

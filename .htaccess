@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^confirm$ index.php?controller=Order&action=confirmOrder
