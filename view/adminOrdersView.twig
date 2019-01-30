@@ -15,11 +15,11 @@
         {% for p in orders %}
             <tr>
                 {% if p.status == "ORDERED" %}
-                    <td><button class="changeStatus btn btn-outline-primary" value="{{p.id}}">{{ p.status }}</button></td>
+                    <td><button class="changeStatus btn btn-primary" value="{{p.id}}">{{ p.status }}</button></td>
                 {% elseif p.status == "PREPARE" %}
-                    <td><button class="btn btn-outline-warning changeStatus" value="{{p.id}}">{{ p.status }}</button></td>
+                    <td><button class="btn btn-warning changeStatus" value="{{p.id}}">{{ p.status }}</button></td>
                 {% else %}
-                    <td><button class="changeStatus btn btn-outline-danger" value="{{p.id}}">{{ p.status }}</button></td>
+                    <td><button class="changeStatus btn btn-danger" value="{{p.id}}">{{ p.status }}</button></td>
                 {% endif %}
                 <td>{{ p.date }}</td>
                 <td class="d-lg-table-cell d-none">{{ p.client_name }}</td>

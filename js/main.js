@@ -21,11 +21,14 @@ $(document).ready(function () {
 $( ".changeStatus" ).click(function() {
     var status = $(this).text();
     switch(status){
-        case "ORDERED": $(this).text("PRERARE");
+        case "ORDERED": $(this).text("PREPARE");
+                        $(this).attr('class', 'btn btn-warning changeStatus');
         break;
-        case "PRERARE": $(this).text("FINISH");
+        case "PREPARE": $(this).text("FINISH");
+                        $(this).attr('class', 'changeStatus btn btn-danger');
         break;
         case "FINISH": $(this).text("ORDERED");
+                        $(this).attr('class', 'changeStatus btn btn-primary');
         break;
     }
     var data = {
