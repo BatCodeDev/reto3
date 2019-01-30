@@ -66,6 +66,7 @@ class OrderController extends GenericController {
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
             }else{
                 echo "2";
             }
@@ -78,6 +79,12 @@ class OrderController extends GenericController {
             "id"=>$_SESSION["id"],
             "user"=>$_SESSION["user"],
             "listProduct" => $_SESSION["qty"]
+        ));
+    }
+    public function confirmOrder(){
+        $order = new Order($this->connection);
+        $this->view("orderConfirm", array(
+            "title"=>"orderConfirm"
         ));
     }
 }
