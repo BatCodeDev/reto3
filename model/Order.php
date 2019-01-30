@@ -71,6 +71,22 @@ class Order extends Generic{
         $res->execute();
         return $res->fetchAll();
     }
+    public function getClienteByOrder($idOrder){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM clientorder where id = :idOrder"
+        );
+        $res->execute(array("idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
+    public function getQuantityByProduct($idProduct, $idOrder){
+        $res = parent::getConnection()->prepare(
+            "SELECT quantity FROM orderproduct where idProduct = :idProduct and idOrder = :idOrder"
+        );
+        $res->execute(
+            array("idProduct" => $idProduct, 
+                "idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
     public function insertOrder(){
         $res = parent::getConnection()->prepare(
             "INSERT INTO clientOrder (commentary, date, client_name, client_surname, client_number, client_email, status) 
@@ -104,6 +120,16 @@ class Order extends Generic{
             "commentary"=>$commentary,
             "dateOrder"=>$date,
             "idUser"=>$idUser
+        ));
+    }
+
+    public function updateClientOrder($orderId, $status){
+        $res = parent::getConnection()->prepare(
+            "UPDATE clientorder SET status = :status WHERE id = :orderId"
+        );
+        $res->execute(array(
+            "status"=>$status,
+            "orderId"=>$orderId
         ));
     }
 
