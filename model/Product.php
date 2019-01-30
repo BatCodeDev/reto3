@@ -49,6 +49,14 @@ class Product extends Generic{
         return $res->fetchAll();
     }
 
+    public function getProductByOrder($idOrder){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product where id in (select idProduct from orderproduct where idOrder = :idOrder)"
+        );
+        $res->execute(array("idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
+
     public function selectById($id){
         $res = parent::getConnection()->prepare(
             "SELECT * FROM product WHERE id = :id"

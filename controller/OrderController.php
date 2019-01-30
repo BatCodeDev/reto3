@@ -8,11 +8,18 @@ class OrderController extends GenericController {
     public function __construct(){
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Order.php";
+        require_once __DIR__."/../model/Product.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
     public function cart(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         $cart = null;
         if (isset($_SESSION["cart"])){
             $cart = $_SESSION["cart"];
@@ -20,7 +27,28 @@ class OrderController extends GenericController {
         $this->view("newOrder", array(
             "title"=>"Pedido",
             "cart"=>$cart,
-            "listProduct"=>$_SESSION["qty"]
+            "listProduct"=>$_SESSION["qty"],
+            "id" => $id,
+            "user" => $user
+        ));
+    }
+    function details(){
+        $product =  new Product($this->connection);
+        $order =  new Order($this->connection);
+
+        $cart = [];
+
+        foreach ($product->getProductByOrder($_GET["idOrder"]) as $p) {
+
+            $p["quantity"] = $order->getQuantityByProduct($p["id"], $_GET["idOrder"])[0]["quantity"];
+            $cart[] = $p;
+        }
+
+        $client = $order->getClienteByOrder($_GET["idOrder"]);
+        $this->view("orderDetails", array(
+            "title"=>"Pedido",
+            "cart"=>$cart,
+            "client"=>$client[0]
         ));
     }
     function setAll($order){
@@ -32,6 +60,10 @@ class OrderController extends GenericController {
         $order->setUserEmail($_POST["email"]);
         return $order;
     }
+    function changeStatus(){
+        $order =  new Order($this->connection);
+        $order->updateClientOrder($_POST["orderId"], $_POST["status"]);
+    }
     public function insert(){
         if($_SESSION["qty"] == 0){
             echo "0";
@@ -42,9 +74,31 @@ class OrderController extends GenericController {
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
             }else{
                 echo "2";
             }
         }
+    }
+    public function allOrders(){
+        $order = new Order($this->connection);
+        $this->view("adminOrders", array(
+            "orders"=>$order->getAll(),
+            "id"=>$_SESSION["id"],
+            "user"=>$_SESSION["user"],
+            "listProduct" => $_SESSION["qty"]
+        ));
+    }
+    public function confirmOrder(){
+        $order = new Order($this->connection);
+        $order->updateClientOrder($_GET["idOrder"], "CONFIRMED");
+        $this->view("orderConfirm", array(
+            "title"=>"orderConfirm"
+        ));
+    }
+    public function deleteOrder(){
+        $order = new Order($this->connection);
+        $order->delete($_GET["idOrder"], "clientorder");
+        header("Location: index.php?controller=Order&action=allOrders");
     }
 }

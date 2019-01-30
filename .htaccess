@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^confirm/([0-9]*)$ index.php?controller=Order&action=confirmOrder&idOrder=$1

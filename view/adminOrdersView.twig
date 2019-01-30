@@ -1,0 +1,46 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th class="th-sm">Estado</th>
+            <th class="th-sm">Fecha</th>
+            <th class="th-sm d-lg-table-cell d-none">Nombre cliente</th>
+            <th class="th-sm">Email cliente</th>
+            <th class="th-sm d-lg-table-cell d-none">Telefono cliente</th>
+            <th class="th-sm">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in orders %}
+            <tr>
+                {% if p.status == "CONFIRMED" %}
+                    <td><button class="changeStatus btn btn-primary" value="{{p.id}}">{{ p.status }}</button></td>
+                {% elseif p.status == "ORDERED" %}
+                    <td><button class="btn btn-warning changeStatus" value="{{p.id}}">{{ p.status }}</button></td>
+                {% else %}
+                    <td><button class="changeStatus btn btn-success" value="{{p.id}}">{{ p.status }}</button></td>
+                {% endif %}
+                <td>{{ p.date }}</td>
+                <td class="d-lg-table-cell d-none">{{ p.client_name }}</td>
+                <td>{{ p.client_email }}</td>
+                <td class="d-lg-table-cell d-none">{{ p.client_number }}</td>
+                <td>
+                    <a href="index.php?controller=Order&action=details&idOrder={{p.id}}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> <span class="d-lg-inline d-none">Editar</span></a>
+                    <a href="index.php?controller=Order&action=deleteOrder&idOrder={{p.id}}" class="btn btn-outline-danger"><i class="fas fa-trash"></i><span class="d-lg-inline d-none">Eliminar</span></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th class="d-lg-table-cell d-none">Nombre cliente</th>
+            <th>Email cliente</th>
+            <th class="d-lg-table-cell d-none">Telefono cliente</th>
+            <th>Acciones</th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

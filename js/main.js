@@ -1,8 +1,12 @@
 $(document).ready(function () {
     $('#dtMaterialDesignExample').DataTable();
-    $('#dtMaterialDesignExample_wrapper > div').addClass("col-10 offset-1")
+
+    $('#dtMaterialDesignExample_wrapper > div').addClass("col-12");
+    $('#dtMaterialDesignExample_wrapper > div').css("margin","0");
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
+        $('input').attr("id", "productSearch");
+
         $('input').css("margin-top", "1.2rem");
         $('input').removeClass('form-control-sm');
     });
@@ -14,10 +18,40 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
 });
-function ajax_listen(idForm, target, action){
+$( ".changeStatus" ).click(function() {
+    var status = $(this).text();
+    switch(status){
+        case "CONFIRMED": $(this).text("FINISHED");
+                        $(this).attr('class', 'btn btn-success changeStatus');
+        break;
+    }
+    var data = {
+        status: $(this).text(),
+        orderId: $(this).val()
+    };
+    ajax_listen("", "index.php?controller=Order&action=changeStatus", "", data);
+});
+var deleteCart = [];
+function trashCart(id) {
+    if(deleteCart.includes(id)){
+        deleteCart.splice(deleteCart.indexOf(id), 1);
+    }else{
+        deleteCart.push(id);
+    }
+}
+function deleteSelect() {
+    let send_data = "";
+    send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
+    ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
+}
+function ajax_listen(idForm, target, action, send_data){
     var form_data = "";
     if (idForm !== "")
         form_data = $("#"+idForm).serialize();
+    else
+        if (send_data !== "" || send_data !== undefined){
+            form_data = send_data;
+        }
     $.ajax({
         type: "POST",
         url: target,
@@ -30,6 +64,13 @@ function ajax_listen(idForm, target, action){
     });
     return false;
 }
+
+
+let multiDelete = function () {
+    window.location.reload();
+};
+
+
 let reloadCart = function (data) {
     data = JSON.parse(data);
     if (data.total+1 !== 1){
@@ -57,7 +98,7 @@ let errorCart = function (data) {
             $("#orderMsg").show();
             break;
         case "1":
-            $("#orderMsg span").html(" Pedido realizado correctamente");
+            $("#orderMsg span").html(" Pedido realizado correctamente<br> En breves instantes recibira un mail de confirmacion");
             $("#orderMsg").addClass("alert alert-success");
             $("#orderMsg i").addClass("fas fa-check-circle");
             $("#orderMsg").show();
@@ -89,4 +130,7 @@ let errorLogin = function (data) {
 
 let addCart = function (data) {
     location.reload();
+}
+let searchProducts=function (data) {
+    $('#resultSearch').html(data);
 }

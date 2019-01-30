@@ -9,6 +9,20 @@
   right: 4px;
   top: 4px;
 }
+#customNavBar{
+  flex-direction: row;
+}
+#customNavBar>li:first-of-type{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+#customDropDown{
+  position: absolute !important;
+}
+#cart{
+  position: absolute;
+  right: 10px;
+}
 .form-control:disabled{
   background: white !important;
 }
