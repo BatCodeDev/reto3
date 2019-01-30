@@ -82,7 +82,8 @@ class OrderController extends GenericController {
         ));
     }
     public function confirmOrder(){
-        $order = new Order($this->connection);
+        /*$order = new Order($this->connection);
+        $order->updateClientOrder($_GET["idOrder"], "CONFIRMED");*/
         $this->view("orderConfirm", array(
             "title"=>"orderConfirm"
         ));
