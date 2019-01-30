@@ -71,6 +71,13 @@ class Order extends Generic{
         $res->execute();
         return $res->fetchAll();
     }
+    public function getProductCount(){
+        $res = parent::getConnection()->prepare(
+            "select idProduct,count(idOrder) as product FROM orderproduct GROUP BY idProduct ORDER BY idProduct DESC"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
     public function insertOrder(){
         $res = parent::getConnection()->prepare(
             "INSERT INTO clientOrder (commentary, date, client_name, client_surname, client_number, client_email, status) 
