@@ -18,7 +18,22 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
 });
-
+$( ".changeStatus" ).click(function() {
+    var status = $(this).text();
+    switch(status){
+        case "ORDERED": $(this).text("PRERARE");
+        break;
+        case "PRERARE": $(this).text("FINISH");
+        break;
+        case "FINISH": $(this).text("ORDERED");
+        break;
+    }
+    var data = {
+        status: $(this).text(),
+        orderId: $(this).val()
+    };
+    ajax_listen("", "index.php?controller=Order&action=changeStatus", "", data);
+});
 var deleteCart = [];
 function trashCart(id) {
     if(deleteCart.includes(id)){
@@ -28,7 +43,6 @@ function trashCart(id) {
     }
 }
 function deleteSelect() {
-    debugger;
     let send_data = "";
     send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
     ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
@@ -41,7 +55,6 @@ function ajax_listen(idForm, target, action, send_data){
         if (send_data !== "" || send_data !== undefined){
             form_data = send_data;
         }
-
     $.ajax({
         type: "POST",
         url: target,

@@ -1,0 +1,57 @@
+{% extends "genericLayout.twig" %}
+{% block content %}
+    <div class="row">
+        <div id="cartReload" class="col-md-8">
+            {% set total = 0 %}
+            {% for p in cart %}
+                <div class="row card d-flex flex-row">
+                    <div class="col-md-2">
+                        <img class="card-img-top" src="img/productImg/{{ p.img }}" alt="Card image cap">
+                    </div>
+                    <div class="row col-md-10 card-body align-items-center">
+                        <div class="col-md-3">{{ p.name }} id: {{ p.id }}</div>
+                        <div class="col-md-3"><span id="addQty{{ p.id }}">{{ p.quantity }}</span> &times; <span id="prize{{ p.id }}">{{ p.prize }}</span> €</div>
+                        <div class="col-md-2"><span class="result{{ p.id }} sum">{{ p.quantity * p.prize }}</span> €</div>
+                    </div>
+                </div>
+                {% set total = total + p.quantity * p.prize %}
+            {% endfor %}
+            <div class="row card d-flex flex-row">
+                <div class="col-md-4"></div>
+                <div class="row col-md-8 card-body align-items-center">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><b>Total:</b></div>
+                    <div class="col-md-2"><span id="totalResult">{{ total }}</span> €</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input id="name" name="name" type="text" class="form-control" value="{{client.client_name}}" required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Apellidos</label>
+                    <input id="surname" name="surname" type="text" class="form-control" value="{{client.client_surname}}" required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="tlfo">Telefono</label>
+                    <input id="tlfo" name="tlfo" type="text" class="form-control" value="{{client.client_number}}" required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" class="form-control" value="{{client.client_email}}" required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="coment">Commentario</label>
+                    <textarea id="coment" name="coment" type="coment" class="form-control" disabled>{{client.commentary}}</textarea>
+                </div>
+                <div class="form-group">
+                    <div id="orderMsg"><i></i><span></span></div>
+                </div>
+                <div class="form-group">
+                    <a href="index.php?controller=Order&action=allOrders" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+                </div>
+        </div>
+    </div>
+{% endblock %}
