@@ -73,7 +73,7 @@ class Order extends Generic{
     }
     public function getProductCount(){
         $res = parent::getConnection()->prepare(
-            "select idProduct,count(idOrder) as product FROM orderproduct GROUP BY idProduct ORDER BY idProduct DESC"
+            "select o.idProduct as idProduct,count(o.idOrder) as pQuantity, p.name as name FROM orderproduct o, product p WHERE o.idProduct = p.ID GROUP BY idProduct ORDER BY idProduct DESC"
         );
         $res->execute();
         return $res->fetchAll();
