@@ -43,7 +43,7 @@ class Product extends Generic{
 
     public function getAll(){
         $res = parent::getConnection()->prepare(
-            "SELECT * FROM product"
+            "SELECT * FROM product ORDER BY name"
         );
         $res->execute();
         return $res->fetchAll();

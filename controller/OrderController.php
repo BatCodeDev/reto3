@@ -71,10 +71,10 @@ class OrderController extends GenericController {
             $order = $this->setAll(new Order($this->connection));
             $ok = $order->insertOrder();
             if ($ok != 0){
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok, $_SESSION["cart"]);
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
-                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
             }else{
                 echo "2";
             }
