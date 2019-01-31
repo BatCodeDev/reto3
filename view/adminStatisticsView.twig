@@ -1,8 +1,8 @@
 {% extends "genericLayout.twig" %}
 {% block content %}
-    {% for element in orders %}
-        <input type="hidden" class="products" name="product" value="{{ element.product }}" id="{{ element.idProduct }}">
+    {% for key,element in orders %}
+        <input type="hidden" class="products" name="{{ element.name }}" value="{{ element.pQuantity }}" id="product{{ key }}">
     {% endfor %}
-    {{ title }}
+    <h1>{{ title }}</h1>
     <div id="chart_div"></div>
 {% endblock %}
