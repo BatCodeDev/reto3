@@ -3,6 +3,9 @@
     <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
         <thead>
         <tr>
+            <th class="th-sm"><button class="searchStatus btn btn-warning">CONFIRMADO</button></th>
+        </tr>
+        <tr>
             <th class="th-sm">Estado</th>
             <th class="th-sm">Fecha</th>
             <th class="th-sm d-lg-table-cell d-none">Nombre cliente</th>
@@ -14,9 +17,9 @@
         <tbody>
         {% for p in orders %}
             <tr>
-                {% if p.status == "CONFIRM" %}
+                {% if p.status == "CONFIRMADO" %}
                     <td><button class="changeStatus btn btn-primary" value="{{p.id}}">{{ p.status }}</button></td>
-                {% elseif p.status == "ORDERED" %}
+                {% elseif p.status == "PENDIENTE" %}
                     <td><button class="btn btn-warning changeStatus" value="{{p.id}}">{{ p.status }}</button></td>
                 {% else %}
                     <td><button class="changeStatus btn btn-danger" value="{{p.id}}">{{ p.status }}</button></td>
