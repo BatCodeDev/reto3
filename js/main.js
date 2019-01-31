@@ -21,8 +21,8 @@ $(document).ready(function () {
 $( ".changeStatus" ).click(function() {
     var status = $(this).text();
     switch(status){
-        case "CONFIRMED": $(this).text("FINISHED");
-                        $(this).attr('class', 'btn btn-success changeStatus');
+        case "CONFIRMADO": $(this).text("ENTREGADO");
+                        $(this).attr('class', 'btn btn-danger changeStatus');
         break;
     }
     var data = {
@@ -30,6 +30,14 @@ $( ".changeStatus" ).click(function() {
         orderId: $(this).val()
     };
     ajax_listen("", "index.php?controller=Order&action=changeStatus", "", data);
+});
+$( ".searchStatus" ).click(function() {
+    var status = $(this).text();
+        $("#productSearch").val(status);
+        $("#productSearch").focus();
+        e = jQuery.Event("keyup");
+        e.which = 13
+        jQuery('#productSearch').trigger(e);
 });
 var deleteCart = [];
 function trashCart(id) {
