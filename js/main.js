@@ -65,6 +65,7 @@ function ajax_listen(idForm, target, action, send_data){
         url: target,
         data: form_data,
         success: function(data){
+            debugger;
             if(action !== "")
                 action(data);
         },
@@ -113,6 +114,12 @@ let errorCart = function (data) {
             break;
         case "2":
             $("#orderMsg span").html(" No se ha podido realizar el pedido");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
+        default:
+            $("#orderMsg span").html(" No se ha podido enviar el mail de confirmacion");
             $("#orderMsg").addClass("alert alert-danger");
             $("#orderMsg i").addClass("fas fa-times-circle");
             $("#orderMsg").show();
