@@ -23,46 +23,18 @@ class ProductController extends GenericController {
         $categories=new Category ($this->connection);
         $categories=$categories->getAll();
         $product = new Product($this->connection);
-        $search = new Category($this->connection);
-        if(isset($_POST['search'])) {
-            if ($_POST['category'] != 0) {
+        $product=$product->getAll();
+        $this->view("products", array(
+            "products" => $product,
+            "activate" => "active",
+            "id" => $id,
+            "user" => $user,
+            "listProduct" => $_SESSION["qty"],
+            "categories" => $categories
+        ));
 
-                $search = $search->getSearchCat($_POST['search'], $_POST['category']);
-                $this->view("products", array(
-                    "products" => $search,
-                    "activate" => "active",
-                    "id" => $id,
-                    "user" => $user,
-                    "listProduct" => $_SESSION["qty"],
-                    "categories" => $categories
-                ));
-
-            } else {
-                $search = $search->getSearch($_POST['search']);
-
-                $this->view("products", array(
-                    "products" => $search,
-                    "activate" => "active",
-                    "id" => $id,
-                    "user" => $user,
-                    "listProduct" => $_SESSION["qty"],
-                    "categories" => $categories
-                ));
-            }
-        }
-        else
-        {
-            $product=$product->getAll();
-            $this->view("products", array(
-                "products" => $product,
-                "activate" => "active",
-                "id" => $id,
-                "user" => $user,
-                "listProduct" => $_SESSION["qty"],
-                "categories" => $categories
-            ));
-        }
     }
+
     public function allProducts(){
         $product = new Product($this->connection);
         $this->view("adminProducts", array(
@@ -80,7 +52,7 @@ class ProductController extends GenericController {
     }
     public function insert(){
         $product = $this->setAll(new Product($this->connection));
-        $header = "location:index.php?controller=Product&action=toProducts";
+        $header = "location:index.php?controller=product&action=toProducts";
         if(isset($_FILES)){
             $extension = explode("/", $_FILES["img"]["type"])[1];
         }
@@ -179,19 +151,9 @@ class ProductController extends GenericController {
         unset($_SESSION["cart"][$product["name"]]);
         header("location:index.php?controller=Order&action=cart");
     }
-
     public function deleteProduct(){
         $product = new Product($this->connection);
         $product->delete($_GET["idProduct"], "product");
         header("location:index.php?controller=Product&action=allProducts");
-    }
-    public function multiDeleteProduct(){
-        $data = json_decode($_POST["ids"]);
-        foreach ($data as $p){
-            echo $p;
-            $product = new Product($this->connection);
-            $product->delete($p, "product");
-        }
-        print_r($data);
     }
 }

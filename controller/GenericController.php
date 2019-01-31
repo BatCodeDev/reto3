@@ -6,6 +6,7 @@ class GenericController{
         try{
             $this->$action();
         }catch (Error $e){
+            var_dump(die($e));
             $this->index();
         }
     }
