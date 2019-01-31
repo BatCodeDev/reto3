@@ -8622,5 +8622,45 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+#msg, #orderMsg {
+  display: none;
+}
+
+.card img {
+  cursor: pointer;
+}
+
+#removeFromCart {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+#customNavBar {
+  flex-direction: row;
+}
+
+#customNavBar > li:first-of-type {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#customDropDown {
+  position: absolute !important;
+}
+
+#cart {
+  position: absolute;
+  right: 10px;
+}
+
+@media (max-width: 600px) {
+  #removeFromCart {
+    position: absolute;
+    right: 20px;
+    bottom: 80px;
+    top: inherit;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

@@ -65,7 +65,6 @@ function ajax_listen(idForm, target, action, send_data){
         url: target,
         data: form_data,
         success: function(data){
-            debugger;
             if(action !== "")
                 action(data);
         },
