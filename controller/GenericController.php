@@ -23,10 +23,10 @@ class GenericController{
             $body.= '<tr><td>'.$c["name"].'</td><td></td><td></td><td></td><td></td><td></td><td>'.$c["quantity"].'</td><td></td><td></td><td></td><td></td><td></td><td>'.$c["prize"].' €</td></tr>';
             $total += floatval($c["prize"]*$c["quantity"]);
         }
-        $body .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Total</b></td><td></td><td></td><td></td><td></td><td></td><td><b>'.$total.' €</b></td></tr></table><p>Haga click aqui para confirmar su pedido</p><a href="'.$url.' style="color: #82005E; text-decoration: none; font-weight: bold;">Confirmar</a></body></html>';
+        $body .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Total</b></td><td></td><td></td><td></td><td></td><td></td><td><b>'.$total.' €</b></td></tr></table><p>Haga click aqui para confirmar su pedido</p><a href="'.$url.'" style="color: #82005E; text-decoration: none; font-weight: bold;">Confirmar</a></body></html>';
         $myfile = fopen("nodejs-compute/samples/send_mail.js", "w");
         $txt = "var Sendgrid = require('sendgrid')(
-                process.env.SENDGRID_API_KEY || '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'
+                process.env.SENDGRID_API_KEY || ''
             );
             
             var request = Sendgrid.emptyRequest({
