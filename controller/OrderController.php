@@ -14,6 +14,12 @@ class OrderController extends GenericController {
         $this->connection = $this->connect->conexion();
     }
     public function cart(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         $cart = null;
         if (isset($_SESSION["cart"])){
             $cart = $_SESSION["cart"];
@@ -21,7 +27,9 @@ class OrderController extends GenericController {
         $this->view("newOrder", array(
             "title"=>"Pedido",
             "cart"=>$cart,
-            "listProduct"=>$_SESSION["qty"]
+            "listProduct"=>$_SESSION["qty"],
+            "id" => $id,
+            "user" => $user
         ));
     }
     function details(){
@@ -66,7 +74,7 @@ class OrderController extends GenericController {
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
-                //$this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok);
             }else{
                 echo "2";
             }
@@ -83,6 +91,7 @@ class OrderController extends GenericController {
     }
     public function confirmOrder(){
         $order = new Order($this->connection);
+        $order->updateClientOrder($_GET["idOrder"], "CONFIRMED");
         $this->view("orderConfirm", array(
             "title"=>"orderConfirm"
         ));

@@ -21,8 +21,8 @@ $(document).ready(function () {
 $( ".changeStatus" ).click(function() {
     var status = $(this).text();
     switch(status){
-        case "CONFIRM": $(this).text("FINISH");
-                        $(this).attr('class', 'btn btn-warning changeStatus');
+        case "CONFIRMED": $(this).text("FINISHED");
+                        $(this).attr('class', 'btn btn-success changeStatus');
         break;
     }
     var data = {
