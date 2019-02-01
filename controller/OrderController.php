@@ -60,6 +60,16 @@ class OrderController extends GenericController {
         $order->setUserEmail($_POST["email"]);
         return $order;
     }
+    public function allStatistics()
+    {
+        $product = new Order($this->connection);
+        $this->view("adminStatistics", array(
+            "title"=>'Estadisticas de ventas',
+            "orders"=>$product->getProductCount(),
+            "id"=>$_SESSION["id"],
+            "user"=>$_SESSION["user"]
+        ));
+    }
     function changeStatus(){
         $order =  new Order($this->connection);
         $order->updateClientOrder($_POST["orderId"], $_POST["status"]);
