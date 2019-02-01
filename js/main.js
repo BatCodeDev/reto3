@@ -110,9 +110,18 @@ let errorCart = function (data) {
             $("#orderMsg").addClass("alert alert-success");
             $("#orderMsg i").addClass("fas fa-check-circle");
             $("#orderMsg").show();
+            setTimeout(function () {
+                window.location.href = "index.php";
+            },1000);
             break;
         case "2":
             $("#orderMsg span").html(" No se ha podido realizar el pedido");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
+        default:
+            $("#orderMsg span").html(" No se ha podido enviar el mail de confirmacion");
             $("#orderMsg").addClass("alert alert-danger");
             $("#orderMsg i").addClass("fas fa-times-circle");
             $("#orderMsg").show();

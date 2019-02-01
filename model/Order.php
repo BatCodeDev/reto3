@@ -61,7 +61,7 @@ class Order extends Generic{
             "userSurname"=>$this->userSurname,
             "userTlfo"=>$this->userTlfo,
             "userEmail"=>$this->userEmail,
-            "status"=>"ORDERED"
+            "status"=>"PENDIENTE"
         );
     }
     public function getAll(){

@@ -16,10 +16,17 @@ class GenericController{
         $twig = new Twig_Environment($loader);
         echo $twig->render($view."View.twig", $data);
     }
-    public function mail_send($name, $mail, $url, $id){
+    public function mail_send($name, $mail, $url, $id, $cart){
+        $body = '<!DOCTYPE html><html><head><title></title></head><body><h3>¡Hola '.$name.'!</h3><table><tr><td><b>Producto</b></td><td></td><td></td><td></td><td></td><td></td><td><b>Unidades</b></td><td></td><td></td><td></td><td></td><td></td><td><b>Precio</b></td></tr>';
+        $total = 0;
+        foreach ($cart as $c){
+            $body.= '<tr><td>'.$c["name"].'</td><td></td><td></td><td></td><td></td><td></td><td>'.$c["quantity"].'</td><td></td><td></td><td></td><td></td><td></td><td>'.$c["prize"].' €</td></tr>';
+            $total += floatval($c["prize"]*$c["quantity"]);
+        }
+        $body .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Total</b></td><td></td><td></td><td></td><td></td><td></td><td><b>'.$total.' €</b></td></tr></table><p>Haga click aqui para confirmar su pedido</p><a href="'.$url.'" style="color: #82005E; text-decoration: none; font-weight: bold;">Confirmar</a></body></html>';
         $myfile = fopen("nodejs-compute/samples/send_mail.js", "w");
         $txt = "var Sendgrid = require('sendgrid')(
-                process.env.SENDGRID_API_KEY || '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'
+                process.env.SENDGRID_API_KEY || ''
             );
             
             var request = Sendgrid.emptyRequest({
@@ -35,9 +42,9 @@ class GenericController{
                     from: {email: 'batcodedev@gmail.com'},
                     content: [
                         {
-                            type: 'text/plain',
+                            type: 'text/html',
                             value:
-                                'Hola ".$name."! Haga click en el siguiente enlace para aceptar el pedido: ".$url."',
+                                '".$body."', 
                         },
                     ],
                 },
