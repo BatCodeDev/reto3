@@ -9,24 +9,10 @@
                         <img class="card-img-top" src="img/productImg/{{ p.img }}" alt="Card image cap">
                     </div>
                     <div class="row col-md-10 card-body align-items-center">
-                        <div class="col-md-3">{{ p.name }}</div>
+                        <div class="col-md-3">{{ p.name }} id: {{ p.id }}</div>
                         <div class="col-md-3"><span id="addQty{{ p.id }}">{{ p.quantity }}</span> &times; <span id="prize{{ p.id }}">{{ p.prize }}</span> €</div>
                         <div class="col-md-2"><span class="result{{ p.id }} sum">{{ p.quantity * p.prize }}</span> €</div>
-                        <div class="col-md-4">
-                                <div class="row justify-content-center">
-                                    <form onsubmit="return ajax_listen('','index.php?controller=Product&action=addQtyCart&idProduct={{ p.id }}',reloadCart)">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-arrow-up"></i></button>
-                                    </form>
-                                    <input id="cartInputQty{{ p.id }}" type="text" class="form-control text-center w-25" value="{{ p.quantity }}" disabled>
-                                    <form onsubmit="return ajax_listen('', 'index.php?controller=Product&action=removeQtyCart&idProduct={{ p.id }}', reloadCart)">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-arrow-down"></i></button>
-                                    </form>
-                                </div>
-                        </div>
                     </div>
-                    <a id="removeFromCart" href="index.php?controller=Product&action=delete&idProduct={{ p.id }}" class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i>
-                    </a>
                 </div>
                 {% set total = total + p.quantity * p.prize %}
             {% endfor %}
@@ -40,35 +26,32 @@
             </div>
         </div>
         <div class="col-md-4">
-            <form id="order_form" onsubmit="return ajax_listen(this.id, 'index.php?controller=Order&action=insert', errorCart)">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" name="name" type="text" class="form-control" required>
+                    <input id="name" name="name" type="text" class="form-control" value="{{client.client_name}}" required disabled>
                 </div>
                 <div class="form-group">
                     <label for="surname">Apellidos</label>
-                    <input id="surname" name="surname" type="text" class="form-control" required>
+                    <input id="surname" name="surname" type="text" class="form-control" value="{{client.client_surname}}" required disabled>
                 </div>
                 <div class="form-group">
                     <label for="tlfo">Telefono</label>
-                    <input id="tlfo" name="tlfo" type="text" class="form-control" required>
+                    <input id="tlfo" name="tlfo" type="text" class="form-control" value="{{client.client_number}}" required disabled>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" class="form-control" required>
+                    <input id="email" name="email" type="email" class="form-control" value="{{client.client_email}}" required disabled>
                 </div>
                 <div class="form-group">
                     <label for="coment">Commentario</label>
-                    <textarea id="coment" name="coment" type="coment" class="form-control"></textarea>
+                    <textarea id="coment" name="coment" type="coment" class="form-control" disabled>{{client.commentary}}</textarea>
                 </div>
                 <div class="form-group">
                     <div id="orderMsg"><i></i><span></span></div>
                 </div>
                 <div class="form-group">
-                    <a href="index.php?controller=Product&action=toProducts" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
-                    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-check"></i> Finalizar</button>
+                    <a href="index.php?controller=Order&action=allOrders" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
                 </div>
-            </form>
         </div>
     </div>
 {% endblock %}
