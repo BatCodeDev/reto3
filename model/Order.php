@@ -61,12 +61,35 @@ class Order extends Generic{
             "userSurname"=>$this->userSurname,
             "userTlfo"=>$this->userTlfo,
             "userEmail"=>$this->userEmail,
-            "status"=>"ORDERED"
+            "status"=>"PENDIENTE"
         );
     }
     public function getAll(){
         $res = parent::getConnection()->prepare(
             "SELECT * FROM clientorder"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
+    public function getClienteByOrder($idOrder){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM clientorder where id = :idOrder"
+        );
+        $res->execute(array("idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
+    public function getQuantityByProduct($idProduct, $idOrder){
+        $res = parent::getConnection()->prepare(
+            "SELECT quantity FROM orderproduct where idProduct = :idProduct and idOrder = :idOrder"
+        );
+        $res->execute(
+            array("idProduct" => $idProduct, 
+                "idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
+    public function getProductCount(){
+        $res = parent::getConnection()->prepare(
+            "select o.idProduct as idProduct,count(o.idOrder) as pQuantity, p.name as name FROM orderproduct o, product p WHERE o.idProduct = p.ID GROUP BY idProduct ORDER BY idProduct DESC"
         );
         $res->execute();
         return $res->fetchAll();
@@ -104,6 +127,16 @@ class Order extends Generic{
             "commentary"=>$commentary,
             "dateOrder"=>$date,
             "idUser"=>$idUser
+        ));
+    }
+
+    public function updateClientOrder($orderId, $status){
+        $res = parent::getConnection()->prepare(
+            "UPDATE clientorder SET status = :status WHERE id = :orderId"
+        );
+        $res->execute(array(
+            "status"=>$status,
+            "orderId"=>$orderId
         ));
     }
 

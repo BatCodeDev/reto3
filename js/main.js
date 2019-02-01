@@ -18,7 +18,27 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
 });
-
+$( ".changeStatus" ).click(function() {
+    var status = $(this).text();
+    switch(status){
+        case "CONFIRMADO": $(this).text("ENTREGADO");
+                        $(this).attr('class', 'btn btn-danger changeStatus');
+        break;
+    }
+    var data = {
+        status: $(this).text(),
+        orderId: $(this).val()
+    };
+    ajax_listen("", "index.php?controller=Order&action=changeStatus", "", data);
+});
+$( ".searchStatus" ).click(function() {
+    var status = $(this).text();
+        $("#productSearch").val(status);
+        $("#productSearch").focus();
+        e = jQuery.Event("keyup");
+        e.which = 13
+        jQuery('#productSearch').trigger(e);
+});
 var deleteCart = [];
 function trashCart(id) {
     if(deleteCart.includes(id)){
@@ -28,7 +48,6 @@ function trashCart(id) {
     }
 }
 function deleteSelect() {
-    debugger;
     let send_data = "";
     send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
     ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
@@ -41,7 +60,6 @@ function ajax_listen(idForm, target, action, send_data){
         if (send_data !== "" || send_data !== undefined){
             form_data = send_data;
         }
-
     $.ajax({
         type: "POST",
         url: target,
@@ -88,13 +106,22 @@ let errorCart = function (data) {
             $("#orderMsg").show();
             break;
         case "1":
-            $("#orderMsg span").html(" Pedido realizado correctamente");
+            $("#orderMsg span").html(" Pedido realizado correctamente<br> En breves instantes recibira un mail de confirmacion");
             $("#orderMsg").addClass("alert alert-success");
             $("#orderMsg i").addClass("fas fa-check-circle");
             $("#orderMsg").show();
+            setTimeout(function () {
+                window.location.href = "index.php";
+            },1000);
             break;
         case "2":
             $("#orderMsg span").html(" No se ha podido realizar el pedido");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
+        default:
+            $("#orderMsg span").html(" No se ha podido enviar el mail de confirmacion");
             $("#orderMsg").addClass("alert alert-danger");
             $("#orderMsg i").addClass("fas fa-times-circle");
             $("#orderMsg").show();

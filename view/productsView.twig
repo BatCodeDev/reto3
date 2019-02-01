@@ -2,15 +2,6 @@
 {% block content %}
     <div class="row">
         <div class="col-md-3">
-            <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action active">
-                    Cras justo odio
-                </button>
-                <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
-            </div>
             <div>
                 <form class="form-inline my-2 my-lg-0" id="searchForm" onsubmit="return ajax_listen(this.id, 'index.php?controller=Category&action=searchP', searchProducts)">
                     <select class="selectpicker  show-menu-arrow form-control" name="category" id="category">
@@ -20,7 +11,7 @@
                         {% endfor %}
                     </select>
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="search" id="search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Buscar</button>
                 </form>
             </div>
         </div>
@@ -63,10 +54,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div id="pImg" class="col-3">
+                                <div id="pImg" class="col-md-4 col-5">
                                     <img height="90">
                                 </div>
-                                <div id="pDesc" class="col-9"></div>
+                                <div id="pDesc" class="col-md-8 col-7"></div>
                             </div>
                         </div>
                         <div class="modal-footer">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2019 a las 12:55:42
+-- Tiempo de generación: 01-02-2019 a las 09:32:12
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -33,17 +33,18 @@ CREATE TABLE `admin` (
   `user` varchar(10) NOT NULL,
   `pass` varchar(20) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `telephone` varchar(9) NOT NULL
+  `telephone` varchar(9) NOT NULL,
+  `clientorders` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `admin`
 --
 
-INSERT INTO `admin` (`id`, `user`, `pass`, `name`, `telephone`) VALUES
-(1, 'admin', 'admin', 'Alejandro', '999999999'),
-(2, 'admin2', 'admin2', 'Rafa', '888888888'),
-(3, 'admin3', 'admin3', 'Alfonso', '777777777');
+INSERT INTO `admin` (`id`, `user`, `pass`, `name`, `telephone`, `clientorders`) VALUES
+(1, 'admin', 'admin', 'Alejandro', '999999999', NULL),
+(2, 'admin2', 'admin2', 'Rafa', '888888888', NULL),
+(3, 'admin3', 'admin3', 'Alfonso', '777777777', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE `clientorder` (
   `client_name` varchar(30) NOT NULL,
   `client_surname` varchar(30) NOT NULL,
   `client_number` varchar(30) NOT NULL,
-  `client_email` varchar(30) NOT NULL,
+  `client_email` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -85,7 +86,30 @@ INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_su
 (6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
 (7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
 (8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED');
+(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
+(10, '', '2019-01-30 10:30:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(11, '', '2019-01-30 10:31:50', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(12, '', '2019-01-30 10:33:30', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(13, '', '2019-01-30 10:43:58', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(14, '', '2019-01-30 10:48:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(15, '', '2019-01-30 10:49:00', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(16, '', '2019-01-30 10:49:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(17, '', '2019-01-31 09:01:53', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(18, '', '2019-01-31 09:04:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(19, '', '2019-01-31 09:04:52', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(20, '', '2019-01-31 09:05:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(21, '', '2019-01-31 09:06:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(22, '', '2019-01-31 09:10:49', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(23, '', '2019-01-31 09:11:13', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(24, '', '2019-01-31 09:11:54', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(25, '', '2019-01-31 09:12:31', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(26, '', '2019-01-31 09:13:51', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(27, '', '2019-01-31 09:15:40', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(28, '', '2019-01-31 09:16:22', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(29, '', '2019-01-31 09:21:34', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(30, '', '2019-01-31 09:22:06', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
+(32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED');
 
 -- --------------------------------------------------------
 
@@ -104,16 +128,26 @@ CREATE TABLE `orderproduct` (
 --
 
 INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
-(2, 2, 2),
-(2, 3, 4),
-(3, 2, 4),
-(3, 3, 4),
-(4, 2, 1),
-(5, 2, 1),
-(6, 2, 1),
-(7, 2, 1),
-(8, 2, 1),
-(9, 2, 3);
+(15, 10, 1),
+(15, 9, 1),
+(16, 10, 1),
+(16, 9, 1),
+(17, 10, 3),
+(18, 10, 1),
+(19, 10, 1),
+(20, 10, 1),
+(21, 10, 1),
+(22, 10, 1),
+(23, 10, 1),
+(24, 10, 1),
+(25, 10, 1),
+(26, 10, 1),
+(27, 10, 1),
+(28, 10, 1),
+(29, 10, 1),
+(30, 10, 1),
+(31, 10, 1),
+(32, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -134,22 +168,18 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`) VALUES
-(2, 'plato1', 'nada', 2.3, '5c46cf6baa3b8.png'),
-(3, 'plato2', 'nada2', 3.4, '5c46d10d74718.png'),
-(4, 'plato3', 'nada3', 3.4, '5c46da83b6293.png'),
-(5, 'plato4', 'nada4', 4.3, '5c46daef26c06.jpeg'),
-(6, 'plato5', 'nadaaa', 2.3, '5c499a97c7912.jpeg'),
-(7, 'corequetas', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(8, 'pasta', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(9, 'paella', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(10, 'arroz', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(11, 'nachos', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(12, 'totilla', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(13, 'galletas', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(14, 'pate', 'ricas', 2.3, '5c499a97c7912.jpeg'),
-(15, 'helado', 'ricas', 2.3, '5c499a97c7912.jpeg'),
+(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg'),
+(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg'),
+(9, 'paella', 'ricas', 2.3, 'paella.jpeg'),
+(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg'),
+(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg'),
+(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg'),
+(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg'),
+(14, 'pate', 'ricas', 2.3, 'pate.jpeg'),
+(15, 'helado', 'ricas', 2.3, 'helado.jpeg'),
 (16, 'pollo', 'nada', 2.3, 'pollo.jpeg'),
-(17, 'espagueti', 'nada', 4.5, 'espagueti.jpeg');
+(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg'),
+(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg');
 
 -- --------------------------------------------------------
 
@@ -224,13 +254,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
@@ -240,8 +270,8 @@ ALTER TABLE `product`
 -- Filtros para la tabla `orderproduct`
 --
 ALTER TABLE `orderproduct`
-  ADD CONSTRAINT `fk_order_orderProduct` FOREIGN KEY (`idOrder`) REFERENCES `clientorder` (`id`),
-  ADD CONSTRAINT `fk_product_orderProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `fk_order_orderProduct` FOREIGN KEY (`idOrder`) REFERENCES `clientorder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_product_orderProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productcategory`
