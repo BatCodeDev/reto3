@@ -77,6 +77,4 @@ class UserController extends GenericController {
         session_destroy();
         header("location:index.php");
     }
-
-
 }
