@@ -32,19 +32,25 @@ function drawChart() {
 
     data2.addRows(arrayFilas);
 
-    //let h = $("#chart_div").height();
-    //let w = $("#chart_div").width();
-    let h=1000;
-    let w=1000;
+    let h = 1000;
+    let w = 1000;
+    //let h=1000;
+    //let w=1000;
     let options = {
         'title':'Platos mas vendidos:',
         pieHole:0.3,
-        'width':w,
-        'height':h
+        'width': w,
+        'height': h
+
     };
 
 
 
-    var chart = new google.visualization.PieChart($('#chart_div')[0]);
+    let chart = new google.visualization.PieChart($('#chart_div')[0]);
     chart.draw(data2, options);
 }
+
+$(window).resize(function(){
+    drawChart();
+// drawChart2();
+});
