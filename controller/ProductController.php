@@ -78,8 +78,11 @@ class ProductController extends GenericController {
         if ($_SESSION["user"]){
             $user = $_SESSION["user"];
         }
+        $categories=new Category ($this->connection);
+        $categories=$categories->getAll();
         $this->view("addProduct", array(
-            "user"=>$user
+            "user"=>$user,
+            "categories"=>$categories
         ));
     }
     public function details(){
@@ -164,6 +167,6 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        print_r($data);
+        //print_r($data);
     }
 }

@@ -17,13 +17,14 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper select').addClass('custom-select');
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+
 });
 $( ".changeStatus" ).click(function() {
     var status = $(this).text();
     switch(status){
         case "CONFIRMADO": $(this).text("ENTREGADO");
-                        $(this).attr('class', 'btn btn-danger changeStatus');
-        break;
+            $(this).attr('class', 'btn btn-danger changeStatus');
+            break;
     }
     var data = {
         status: $(this).text(),
@@ -33,11 +34,11 @@ $( ".changeStatus" ).click(function() {
 });
 $( ".searchStatus" ).click(function() {
     var status = $(this).text();
-        $("#productSearch").val(status);
-        $("#productSearch").focus();
-        e = jQuery.Event("keyup");
-        e.which = 13
-        jQuery('#productSearch').trigger(e);
+    $("#productSearch").val(status);
+    $("#productSearch").focus();
+    e = jQuery.Event("keyup");
+    e.which = 13
+    jQuery('#productSearch').trigger(e);
 });
 var deleteCart = [];
 function trashCart(id) {
@@ -57,9 +58,9 @@ function ajax_listen(idForm, target, action, send_data){
     if (idForm !== "")
         form_data = $("#"+idForm).serialize();
     else
-        if (send_data !== "" || send_data !== undefined){
-            form_data = send_data;
-        }
+    if (send_data !== "" || send_data !== undefined){
+        form_data = send_data;
+    }
     $.ajax({
         type: "POST",
         url: target,
@@ -150,4 +151,17 @@ let addCart = function (data) {
 }
 let searchProducts=function (data) {
     $('#resultSearch').html(data);
+}
+
+
+$('#addCategory').click(function () {
+    let send_data = "";
+    send_data = "category="+JSON.stringify($('#category').val());
+    ajax_listen("","index.php?controller=Category&action=insert",addCategory,send_data);
+
+});
+let addCategory = function (data) {
+    //alert(data);
+    $('#categoryPicker').add($('#category').val());
+    $('#category').val("");
 }
