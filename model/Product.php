@@ -3,7 +3,7 @@ require_once "Generic.php";
 class Product extends Generic{
     private $connection;
 
-    private $name, $description, $prize, $img;
+    private $name, $description, $prize, $img, $category;
 
     public function __construct($connection){
         parent::__construct($connection);
@@ -41,6 +41,16 @@ class Product extends Generic{
         $this->img = $img;
     }
 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
     public function getAll(){
         $res = parent::getConnection()->prepare(
             "SELECT * FROM product ORDER BY name"
@@ -71,7 +81,8 @@ class Product extends Generic{
             "name"=>$this->name,
             "description"=>$this->description,
             "prize"=>$this->prize,
-            "img"=>$this->img
+            "img"=>$this->img,
+            "category"=>$this->category
         ];
     }
     public function searchById($id){
@@ -85,7 +96,7 @@ class Product extends Generic{
     }
     public function insertProduct(){
         $res = parent::getConnection()->prepare(
-            "INSERT INTO product (name, description, prize, img) VALUES (:name, :description, :prize, :img)"
+            "INSERT INTO product (name, description, prize, img, id_category) VALUES (:name, :description, :prize, :img, :category)"
         );
         $res->execute($this->data());
         $lastid = parent::getConnection()->lastInsertId();
@@ -95,7 +106,7 @@ class Product extends Generic{
 
     public function updateProduct($id){
         $res = parent::getConnection()->prepare(
-            "UPDATE product SET name = :name, description = :description, prize = :prize, img = :img WHERE id = ".$id
+            "UPDATE product SET name = :name, description = :description, prize = :prize, img = :img, category = :category WHERE id = ".$id
         );
         $res->execute($this->data());
         $this->connection = null;
