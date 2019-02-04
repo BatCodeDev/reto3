@@ -9,6 +9,7 @@ class ProductController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
         require_once __DIR__."/../model/Category.php";
+        require_once __DIR__."/../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();

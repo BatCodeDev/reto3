@@ -89,5 +89,17 @@ class User extends Generic{
             "email"=>$email
         ));
     }
-
+    public function setNoOrders($mode){
+        $res = parent::getConnection()->prepare(
+            "UPDATE options SET noOrders = ".$mode
+        );
+        $res->execute();
+    }
+    public function getNoOrders(){
+        $res = parent::getConnection()->prepare(
+            "SELECT noOrders FROM options"
+        );
+        $res->execute();
+        return $res->fetchAll()[0]["noOrders"];
+    }
 }

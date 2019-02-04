@@ -53,6 +53,23 @@ function deleteSelect() {
     send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
     ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
 }
+function switchOrders(sw) {
+    if (sw.checked){
+        $("#switchOn").hide();
+        $("#switchOff").fadeIn(300);
+        setTimeout(function () {
+            $("#switchOff").fadeOut(300);
+            setTimeout(function () {$("#switchInfo").fadeIn(300);},500);
+        },3000);
+        ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=1");
+    }else{
+        $("#switchOff").hide();
+        $("#switchInfo").hide();
+        $("#switchOn").fadeIn(300);
+        setTimeout(function () {$("#switchOn").fadeOut(300);},3000);
+        ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=0");
+    }
+}
 function ajax_listen(idForm, target, action, send_data){
     var form_data = "";
     if (idForm !== "")
@@ -79,6 +96,17 @@ let multiDelete = function () {
     window.location.reload();
 };
 
+let infoMsg = function (data) {
+    if (data === "0"){
+        $("#switchInfo").hide();
+    }else{
+        if (data === "1"){
+            $("#switchInfo").fadeIn(300);
+            $(".switch input").attr("checked","checked");
+        }
+    }
+};
+ajax_listen("", "index.php?controller=User&action=getNoOrders", infoMsg, "");
 
 let reloadCart = function (data) {
     data = JSON.parse(data);
@@ -97,7 +125,8 @@ let reloadCart = function (data) {
             return Math.round( (total) * 10) / 10;
         });
     }
-}
+};
+
 let errorCart = function (data) {
     switch (data){
         case "0":
