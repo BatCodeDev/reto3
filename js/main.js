@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper > div').css("margin","0");
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
-        $('input').attr("id", "productSearch");
+        $('input').addClass("productSearch");
 
         $('input').css("margin-top", "1.2rem");
         $('input').removeClass('form-control-sm');
@@ -34,11 +34,11 @@ $( ".changeStatus" ).click(function() {
 });
 $( ".searchStatus" ).click(function() {
     var status = $(this).text();
-    $("#productSearch").val(status);
-    $("#productSearch").focus();
+    $(".productSearch").val(status);
+    $(".productSearch").focus();
     e = jQuery.Event("keyup");
-    e.which = 13
-    jQuery('#productSearch').trigger(e);
+    e.which = 13;
+    jQuery('.productSearch').trigger(e);
 });
 var deleteCart = [];
 function trashCart(id) {
@@ -60,13 +60,13 @@ function switchOrders(sw) {
         setTimeout(function () {
             $("#switchOff").fadeOut(300);
             setTimeout(function () {$("#switchInfo").fadeIn(300);},500);
-        },3000);
+        },1500);
         ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=1");
     }else{
         $("#switchOff").hide();
         $("#switchInfo").hide();
         $("#switchOn").fadeIn(300);
-        setTimeout(function () {$("#switchOn").fadeOut(300);},3000);
+        setTimeout(function () {$("#switchOn").fadeOut(300);},1500);
         ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=0");
     }
 }
