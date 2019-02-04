@@ -66,6 +66,7 @@ function ajax_listen(idForm, target, action, send_data){
         url: target,
         data: form_data,
         success: function(data){
+            debugger;
             if(action !== "")
                 action(data);
         },
@@ -154,14 +155,3 @@ let searchProducts=function (data) {
 }
 
 
-$('#addCategory').click(function () {
-    let send_data = "";
-    send_data = "category="+JSON.stringify($('#category').val());
-    ajax_listen("","index.php?controller=Category&action=insert",addCategory,send_data);
-
-});
-let addCategory = function (data) {
-    //alert(data);
-    $('#categoryPicker').add($('#category').val());
-    $('#category').val("");
-}
