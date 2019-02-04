@@ -8622,6 +8622,10 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+#navigation {
+  height: 60px !important;
+}
+
 #msg, #orderMsg {
   display: none;
 }
@@ -8660,6 +8664,16 @@ a.text-dark:hover, a.text-dark:focus {
     right: 20px;
     bottom: 80px;
     top: inherit;
+  }
+
+  #switchInfo {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    margin: 0 2% !important;
+    top: 50px;
+    height: auto !important;
   }
 }
 
