@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2019 a las 09:32:12
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Tiempo de generación: 04-02-2019 a las 13:34:14
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -56,6 +56,17 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'aaaarroz'),
+(2, 'aaaatrox'),
+(3, 'penbe'),
+(4, 'alejandro'),
+(5, 'alejandroalejandro');
 
 -- --------------------------------------------------------
 
@@ -160,26 +171,28 @@ CREATE TABLE `product` (
   `name` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL,
   `prize` double NOT NULL,
-  `img` varchar(100) NOT NULL
+  `img` varchar(100) NOT NULL,
+  `id_category` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`) VALUES
-(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg'),
-(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg'),
-(9, 'paella', 'ricas', 2.3, 'paella.jpeg'),
-(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg'),
-(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg'),
-(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg'),
-(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg'),
-(14, 'pate', 'ricas', 2.3, 'pate.jpeg'),
-(15, 'helado', 'ricas', 2.3, 'helado.jpeg'),
-(16, 'pollo', 'nada', 2.3, 'pollo.jpeg'),
-(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg'),
-(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg');
+INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`, `id_category`) VALUES
+(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg', 0),
+(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg', 0),
+(9, 'paella', 'ricas', 2.3, 'paella.jpeg', 0),
+(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg', 0),
+(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg', 0),
+(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg', 0),
+(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg', 0),
+(14, 'pate', 'ricas', 2.3, 'pate.jpeg', 0),
+(15, 'helado', 'ricas', 2.3, 'helado.jpeg', 0),
+(16, 'pollo', 'nada', 2.3, 'pollo.jpeg', 0),
+(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg', 0),
+(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg', 0),
+(19, 'alejandro', 'alejandro', 12, 'alejandro.jpeg', 5);
 
 -- --------------------------------------------------------
 
@@ -248,7 +261,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `clientorder`
@@ -260,7 +273,7 @@ ALTER TABLE `clientorder`
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
