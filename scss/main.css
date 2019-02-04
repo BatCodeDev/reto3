@@ -8667,11 +8667,11 @@ a.text-dark:hover, a.text-dark:focus {
   }
 
   #switchInfo {
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 1;
     left: 0;
-    margin: 0 2% !important;
+    margin: 0 !important;
     top: 50px;
     height: auto !important;
   }
