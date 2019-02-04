@@ -46,8 +46,14 @@ class CategoryController extends GenericController {
                 ));
             }
         }
-
-
+    }
+    public function insert()
+    {
+        //var_dump(die($_POST["category"]));
+        $data = json_decode($_POST["category"]);
+        $category = new Category($this->connection);
+        $category->insertCategory($data);
+        //print_r($data);
     }
 
 }
