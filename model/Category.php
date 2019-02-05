@@ -34,6 +34,17 @@ class Category extends Generic{
         return $res->fetchAll();
     }
 
+    public function getCategory($name)
+    {
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM category WHERE name=:name"
+        );
+        $res->execute(array(
+            "name"=>$name
+        ));
+        return $res->fetchAll();
+    }
+
     public function insertCategory($name){
         $res = parent::getConnection()->prepare(
             "INSERT INTO category (name) VALUES (:name)"
@@ -73,7 +84,7 @@ class Category extends Generic{
     {
         //var_dump(die($id));
         $res = parent::getConnection()->prepare(
-            "SELECT * FROM product WHERE name LIKE '%".$name."%' and id= (SELECT idProduct FROM productcategory WHERE idCategory=".$id.") ORDER BY name"
+            "SELECT * FROM product WHERE name LIKE '%".$name."%' and id_category=".$id." ORDER BY name"
         );
         $res->execute();
         return $res->fetchAll();
