@@ -80,6 +80,7 @@ class ProductController extends GenericController {
         return $product;
     }
 
+
     public function insert(){
 
         $product = $this->setAll(new Product($this->connection));
@@ -132,8 +133,10 @@ class ProductController extends GenericController {
                 "title"=>"Detalles de producto",
                 "product"=>$product->searchById($_GET["idProduct"])[0],
                 "id"=>$id,
+
                 "user"=>$user,
                 "categories"=>$categories->getAll()
+
             ));
         }
     }
@@ -210,6 +213,5 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        //print_r($data);
     }
 }
