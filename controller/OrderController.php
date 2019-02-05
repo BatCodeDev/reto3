@@ -40,6 +40,12 @@ class OrderController extends GenericController {
         }
     }
     function details(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         $product =  new Product($this->connection);
         $order =  new Order($this->connection);
 
@@ -55,7 +61,9 @@ class OrderController extends GenericController {
         $this->view("orderDetails", array(
             "title"=>"Pedido",
             "cart"=>$cart,
-            "client"=>$client[0]
+            "client"=>$client[0],
+            "id"=>$id,
+            "user"=>$user,
         ));
     }
     function setAll($order){

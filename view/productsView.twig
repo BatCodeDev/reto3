@@ -28,8 +28,10 @@
                                      data-img="{{ product.img }}"
                                      data-desc="{{ product.description }}">
                                 <div class="card-body">
-                                    <p class="card-text">
-                                        {{ product.name }}</p>
+                                    <p class="card-text row">
+                                        <span class="col-8">{{ product.name }}</span>
+                                        <span class="col-4"><b>{{ product.prize }} €</b></span>
+                                    </p>
                                 </div>
                             </div>
                         {% endfor %}
