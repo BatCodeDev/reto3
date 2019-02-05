@@ -41,6 +41,14 @@ class Product extends Generic{
         $this->img = $img;
     }
 
+    public function getAll(){
+        $res = parent::getConnection()->prepare(
+            "SELECT * FROM product ORDER BY name"
+        );
+        $res->execute();
+        return $res->fetchAll();
+    }
+
     public function getCategory()
     {
         return $this->category;
@@ -49,14 +57,6 @@ class Product extends Generic{
     public function setCategory($category)
     {
         $this->category = $category;
-    }
-
-    public function getAll(){
-        $res = parent::getConnection()->prepare(
-            "SELECT * FROM product ORDER BY name"
-        );
-        $res->execute();
-        return $res->fetchAll();
     }
 
     public function getProductByOrder($idOrder){
@@ -103,10 +103,9 @@ class Product extends Generic{
         $this->connection = null;
         return $lastid;
     }
-
     public function updateProduct($id){
         $res = parent::getConnection()->prepare(
-            "UPDATE product SET name = :name, description = :description, prize = :prize, img = :img, category = :category WHERE id = ".$id
+            "UPDATE product SET name = :name, description = :description, prize = :prize, img = :img, id_category = :category WHERE id = ".$id
         );
         $res->execute($this->data());
         $this->connection = null;

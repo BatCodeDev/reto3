@@ -33,6 +33,7 @@ class Category extends Generic{
         $res->execute();
         return $res->fetchAll();
     }
+
     public function getCategory($name)
     {
         $res = parent::getConnection()->prepare(
