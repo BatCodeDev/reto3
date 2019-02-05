@@ -68,11 +68,8 @@ class ProductController extends GenericController {
     public function insert(){
 
         $category = new Category($this->connection);
-        //echo $_POST["category"];
-        print_r($category->getCategory($_POST["category"]));
         if(empty($category->getCategory($_POST["category"])))
         {
-
             $category->insertCategory($_POST["category"]);
         }
         $product = $this->setAll(new Product($this->connection));
@@ -111,11 +108,19 @@ class ProductController extends GenericController {
         ));
     }
     public function details(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         if(isset($_GET["idProduct"])){
             $product = new Product($this->connection);
             $this->view("productDetails",array(
                 "title"=>"Detalles de producto",
-                "product"=>$product->searchById($_GET["idProduct"])[0]
+                "product"=>$product->searchById($_GET["idProduct"])[0],
+                "id"=>$id,
+                "user"=>$user
             ));
         }
     }
