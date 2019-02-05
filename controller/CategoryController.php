@@ -22,10 +22,11 @@ class CategoryController extends GenericController {
     }
 
     public function searchP(){
-        if($_POST['category']!=0)
+        if(isset($_POST['search']))
         {
-            if(isset($_POST['search']))
+            if($_POST['category']!=0)
             {
+
                 $search=new Category($this->connection);
                 $search=$search->getSearchCat($_POST['search'],$_POST['category']);
                 $this->view("search", array(
@@ -33,21 +34,15 @@ class CategoryController extends GenericController {
                     "search"=>$search
                 ));
             }
-        }
-        else
-        {
-            if(isset($_POST['search']))
-            {
-                $search=new Category($this->connection);
-                $search=$search->getSearch($_POST['search']);
+            else {
+                $search = new Category($this->connection);
+                $search = $search->getSearch($_POST['search']);
                 $this->view("search", array(
-                    "title"=>"Resultados busqueda",
-                    "search"=>$search
+                    "title" => "Resultados busqueda",
+                    "search" => $search
                 ));
             }
         }
-
-
     }
 
 }

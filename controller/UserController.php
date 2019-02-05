@@ -77,4 +77,12 @@ class UserController extends GenericController {
         session_destroy();
         header("location:index.php");
     }
+    public function setNoOrders(){
+        $user = new User($this->connection);
+        $user->setNoOrders($_POST["mode"]);
+    }
+    public function getNoOrders(){
+        $user = new User($this->connection);
+        echo $user->getNoOrders();
+    }
 }

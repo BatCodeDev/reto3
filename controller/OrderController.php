@@ -9,28 +9,35 @@ class OrderController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Order.php";
         require_once __DIR__."/../model/Product.php";
+        require_once __DIR__."/../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
     }
     public function cart(){
-        $id = null;
-        $user = null;
-        if (isset($_SESSION["id"], $_SESSION["user"])){
-            $id = $_SESSION["id"];
-            $user = $_SESSION["user"];
+        $user = new User($this->connection);
+        $mode = $user->getNoOrders();
+        if ($mode != 1){
+            $id = null;
+            $user = null;
+            if (isset($_SESSION["id"], $_SESSION["user"])){
+                $id = $_SESSION["id"];
+                $user = $_SESSION["user"];
+            }
+            $cart = null;
+            if (isset($_SESSION["cart"])){
+                $cart = $_SESSION["cart"];
+            }
+            $this->view("newOrder", array(
+                "title"=>"Pedido",
+                "cart"=>$cart,
+                "listProduct"=>$_SESSION["qty"],
+                "id" => $id,
+                "user" => $user
+            ));
+        }else{
+            header("location:index.php?controller=Product&action=toProducts");
         }
-        $cart = null;
-        if (isset($_SESSION["cart"])){
-            $cart = $_SESSION["cart"];
-        }
-        $this->view("newOrder", array(
-            "title"=>"Pedido",
-            "cart"=>$cart,
-            "listProduct"=>$_SESSION["qty"],
-            "id" => $id,
-            "user" => $user
-        ));
     }
     function details(){
         $product =  new Product($this->connection);
@@ -59,6 +66,16 @@ class OrderController extends GenericController {
         $order->setUserTlfo($_POST["tlfo"]);
         $order->setUserEmail($_POST["email"]);
         return $order;
+    }
+    public function allStatistics()
+    {
+        $product = new Order($this->connection);
+        $this->view("adminStatistics", array(
+            "title"=>'Estadisticas de ventas',
+            "orders"=>$product->getProductCount(),
+            "id"=>$_SESSION["id"],
+            "user"=>$_SESSION["user"]
+        ));
     }
     function changeStatus(){
         $order =  new Order($this->connection);
@@ -91,7 +108,7 @@ class OrderController extends GenericController {
     }
     public function confirmOrder(){
         $order = new Order($this->connection);
-        $order->updateClientOrder($_GET["idOrder"], "CONFIRMADO");
+        $order->updateClientOrder($_POST["idOrder"], "CONFIRMADO");
         $this->view("orderConfirm", array(
             "title"=>"orderConfirm"
         ));

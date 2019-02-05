@@ -9,6 +9,7 @@ class ProductController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
         require_once __DIR__."/../model/Category.php";
+        require_once __DIR__."/../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
@@ -45,13 +46,37 @@ class ProductController extends GenericController {
         ));
     }
     public function setAll($product){
+       // var_dump(die( $_POST["name"]));
+        echo 'qweq';
         $product->setName($_POST["name"]);
         $product->setDescription($_POST["descr"]);
         $product->setPrize($_POST["prize"]);
+
+        if($_POST['categoryPicker']==0)
+        {
+            $category=new Category($this->connection);
+            $category=$category->getCategory($_POST["category"]);
+            //var_dump(die( $category[0]['id']));
+            $product->setCategory( $category[0]['id']);
+        }
+        else
+        {
+            $product->setCategory($_POST["categoryPicker"]);
+        }
         return $product;
     }
     public function insert(){
+
+        $category = new Category($this->connection);
+        //echo $_POST["category"];
+        print_r($category->getCategory($_POST["category"]));
+        if(empty($category->getCategory($_POST["category"])))
+        {
+
+            $category->insertCategory($_POST["category"]);
+        }
         $product = $this->setAll(new Product($this->connection));
+
         $header = "location:index.php?controller=Product&action=toProducts";
         if(isset($_FILES)){
             $extension = explode("/", $_FILES["img"]["type"])[1];
@@ -78,8 +103,11 @@ class ProductController extends GenericController {
         if ($_SESSION["user"]){
             $user = $_SESSION["user"];
         }
+        $categories=new Category ($this->connection);
+        $categories=$categories->getAll();
         $this->view("addProduct", array(
-            "user"=>$user
+            "user"=>$user,
+            "categories"=>$categories
         ));
     }
     public function details(){
@@ -164,6 +192,6 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        print_r($data);
+        //print_r($data);
     }
 }
