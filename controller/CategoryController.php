@@ -31,8 +31,7 @@ class CategoryController extends GenericController {
                 $search=$search->getSearchCat($_POST['search'],$_POST['category']);
                 $this->view("search", array(
                     "title"=>"Resultados busqueda",
-                    "search"=>$search,
-                    "caca"=>"caca"
+                    "search"=>$search
                 ));
             }
             else {
@@ -45,6 +44,5 @@ class CategoryController extends GenericController {
             }
         }
     }
-
 
 }

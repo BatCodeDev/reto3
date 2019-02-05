@@ -39,7 +39,7 @@ class GenericController{
                             subject: 'Nº de pedido: ".$id."',
                         },
                     ],
-                    from: {email: 'batcodedev@gmail.com'},
+                    from: {email: 'escueladecocina@batcodedev.com'},
                     content: [
                         {
                             type: 'text/html',
