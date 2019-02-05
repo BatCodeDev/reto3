@@ -27,8 +27,8 @@
                 <td class="d-lg-table-cell d-none">{{ p.description }}</td>
                 <td class="d-lg-table-cell d-none">{{ p.prize }}</td>
                 <td>
-                    <a href="index.php?controller=Product&action=details&idProduct={{ p.id }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> <span class="d-lg-inline d-none">Editar</span></a>
-                    <a id="pDelete{{ p.id }}" href="index.php?controller=Product&action=deleteProduct&idProduct={{ p.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> <span class="d-lg-inline d-none"></span></a>
+                    <a href="index.php?controller=Product&action=details&idProduct={{ p.id }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> </a>
+                    <a id="pDelete{{ p.id }}" href="index.php?controller=Product&action=deleteProduct&idProduct={{ p.id }}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> </a>
                 </td>
             </tr>
         {% endfor %}

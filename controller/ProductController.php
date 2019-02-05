@@ -9,6 +9,7 @@ class ProductController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
         require_once __DIR__."/../model/Category.php";
+        require_once __DIR__."/../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
@@ -23,35 +24,7 @@ class ProductController extends GenericController {
         $categories=new Category ($this->connection);
         $categories=$categories->getAll();
         $product = new Product($this->connection);
-        $search = new Category($this->connection);
-        if(isset($_POST['search'])) {
-            if ($_POST['category'] != 0) {
-
-                $search = $search->getSearchCat($_POST['search'], $_POST['category']);
-                $this->view("products", array(
-                    "products" => $search,
-                    "activate" => "active",
-                    "id" => $id,
-                    "user" => $user,
-                    "listProduct" => $_SESSION["qty"],
-                    "categories" => $categories
-                ));
-
-            } else {
-                $search = $search->getSearch($_POST['search']);
-
-                $this->view("products", array(
-                    "products" => $search,
-                    "activate" => "active",
-                    "id" => $id,
-                    "user" => $user,
-                    "listProduct" => $_SESSION["qty"],
-                    "categories" => $categories
-                ));
-            }
-        }
-        else
-        {
+       
             $product=$product->getAll();
             $this->view("products", array(
                 "products" => $product,
@@ -61,7 +34,7 @@ class ProductController extends GenericController {
                 "listProduct" => $_SESSION["qty"],
                 "categories" => $categories
             ));
-        }
+        
     }
     public function allProducts(){
         $product = new Product($this->connection);
@@ -106,8 +79,11 @@ class ProductController extends GenericController {
         if ($_SESSION["user"]){
             $user = $_SESSION["user"];
         }
+        $categories=new Category ($this->connection);
+        $categories=$categories->getAll();
         $this->view("addProduct", array(
-            "user"=>$user
+            "user"=>$user,
+            "categories"=>$categories
         ));
     }
     public function details(){
@@ -192,6 +168,6 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        print_r($data);
+        //print_r($data);
     }
 }

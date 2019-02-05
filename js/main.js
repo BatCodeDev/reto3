@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper > div').css("margin","0");
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
         $('input').attr("placeholder", "Buscar");
-        $('input').attr("id", "productSearch");
+        $('input').addClass("productSearch");
 
         $('input').css("margin-top", "1.2rem");
         $('input').removeClass('form-control-sm');
@@ -17,19 +17,28 @@ $(document).ready(function () {
     $('#dtMaterialDesignExample_wrapper select').addClass('custom-select');
     $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+
 });
 $( ".changeStatus" ).click(function() {
     var status = $(this).text();
     switch(status){
-        case "CONFIRMED": $(this).text("FINISHED");
-                        $(this).attr('class', 'btn btn-success changeStatus');
-        break;
+        case "CONFIRMADO": $(this).text("ENTREGADO");
+            $(this).attr('class', 'btn btn-danger changeStatus');
+            break;
     }
     var data = {
         status: $(this).text(),
         orderId: $(this).val()
     };
     ajax_listen("", "index.php?controller=Order&action=changeStatus", "", data);
+});
+$( ".searchStatus" ).click(function() {
+    var status = $(this).text();
+    $(".productSearch").val(status);
+    $(".productSearch").focus();
+    e = jQuery.Event("keyup");
+    e.which = 13;
+    jQuery('.productSearch').trigger(e);
 });
 var deleteCart = [];
 function trashCart(id) {
@@ -44,14 +53,31 @@ function deleteSelect() {
     send_data = "ids="+JSON.stringify(deleteCart)+"&inputValue="+$("#productSearch").val();
     ajax_listen("", "index.php?controller=Product&action=multiDeleteProduct", multiDelete, send_data)
 }
+function switchOrders(sw) {
+    if (sw.checked){
+        $("#switchOn").hide();
+        $("#switchOff").fadeIn(300);
+        setTimeout(function () {
+            $("#switchOff").fadeOut(300);
+            setTimeout(function () {$("#switchInfo").fadeIn(300);},500);
+        },1500);
+        ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=1");
+    }else{
+        $("#switchOff").hide();
+        $("#switchInfo").hide();
+        $("#switchOn").fadeIn(300);
+        setTimeout(function () {$("#switchOn").fadeOut(300);},1500);
+        ajax_listen("", "index.php?controller=User&action=setNoOrders", "","mode=0");
+    }
+}
 function ajax_listen(idForm, target, action, send_data){
     var form_data = "";
     if (idForm !== "")
         form_data = $("#"+idForm).serialize();
     else
-        if (send_data !== "" || send_data !== undefined){
-            form_data = send_data;
-        }
+    if (send_data !== "" || send_data !== undefined){
+        form_data = send_data;
+    }
     $.ajax({
         type: "POST",
         url: target,
@@ -70,6 +96,17 @@ let multiDelete = function () {
     window.location.reload();
 };
 
+let infoMsg = function (data) {
+    if (data === "0"){
+        $("#switchInfo").hide();
+    }else{
+        if (data === "1"){
+            $("#switchInfo").fadeIn(300);
+            $(".switch input").attr("checked","checked");
+        }
+    }
+};
+ajax_listen("", "index.php?controller=User&action=getNoOrders", infoMsg, "");
 
 let reloadCart = function (data) {
     data = JSON.parse(data);
@@ -88,7 +125,8 @@ let reloadCart = function (data) {
             return Math.round( (total) * 10) / 10;
         });
     }
-}
+};
+
 let errorCart = function (data) {
     switch (data){
         case "0":
@@ -102,9 +140,18 @@ let errorCart = function (data) {
             $("#orderMsg").addClass("alert alert-success");
             $("#orderMsg i").addClass("fas fa-check-circle");
             $("#orderMsg").show();
+            setTimeout(function () {
+                window.location.href = "index.php";
+            },1000);
             break;
         case "2":
             $("#orderMsg span").html(" No se ha podido realizar el pedido");
+            $("#orderMsg").addClass("alert alert-danger");
+            $("#orderMsg i").addClass("fas fa-times-circle");
+            $("#orderMsg").show();
+            break;
+        default:
+            $("#orderMsg span").html(" No se ha podido enviar el mail de confirmacion");
             $("#orderMsg").addClass("alert alert-danger");
             $("#orderMsg i").addClass("fas fa-times-circle");
             $("#orderMsg").show();
@@ -133,4 +180,17 @@ let addCart = function (data) {
 }
 let searchProducts=function (data) {
     $('#resultSearch').html(data);
+}
+
+
+$('#addCategory').click(function () {
+    let send_data = "";
+    send_data = "category="+JSON.stringify($('#category').val());
+    ajax_listen("","index.php?controller=Category&action=insert",addCategory,send_data);
+
+});
+let addCategory = function (data) {
+    //alert(data);
+    $('#categoryPicker').add($('#category').val());
+    $('#category').val("");
 }

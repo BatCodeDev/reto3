@@ -9,7 +9,7 @@
                         <img class="card-img-top" src="img/productImg/{{ p.img }}" alt="Card image cap">
                     </div>
                     <div class="row col-md-10 card-body align-items-center">
-                        <div class="col-md-3">{{ p.name }} id: {{ p.id }}</div>
+                        <div class="col-md-3">{{ p.name }}</div>
                         <div class="col-md-3"><span id="addQty{{ p.id }}">{{ p.quantity }}</span> &times; <span id="prize{{ p.id }}">{{ p.prize }}</span> €</div>
                         <div class="col-md-2"><span class="result{{ p.id }} sum">{{ p.quantity * p.prize }}</span> €</div>
                         <div class="col-md-4">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tlfo">Telefono</label>
-                    <input id="tlfo" name="tlfo" type="text" class="form-control" required>
+                    <input id="tlfo" name="tlfo" type="text" class="form-control" pattern="[0-9]{9}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>

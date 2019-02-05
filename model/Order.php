@@ -61,7 +61,7 @@ class Order extends Generic{
             "userSurname"=>$this->userSurname,
             "userTlfo"=>$this->userTlfo,
             "userEmail"=>$this->userEmail,
-            "status"=>"ORDERED"
+            "status"=>"PENDIENTE"
         );
     }
     public function getAll(){
@@ -85,6 +85,13 @@ class Order extends Generic{
         $res->execute(
             array("idProduct" => $idProduct, 
                 "idOrder" => $idOrder));
+        return $res->fetchAll();
+    }
+    public function getProductCount(){
+        $res = parent::getConnection()->prepare(
+            "select o.idProduct as idProduct,count(o.idOrder) as pQuantity, p.name as name FROM orderproduct o, product p WHERE o.idProduct = p.ID GROUP BY idProduct ORDER BY idProduct DESC"
+        );
+        $res->execute();
         return $res->fetchAll();
     }
     public function insertOrder(){
