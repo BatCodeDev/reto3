@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2019 a las 09:16:36
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.10
+-- Tiempo de generación: 05-02-2019 a las 10:00:48
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -62,8 +62,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'pepe'),
-(2, '');
+(1, 'pescado');
 
 -- --------------------------------------------------------
 
@@ -119,7 +118,8 @@ INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_su
 (31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
 (32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
 (33, '', '2019-02-01 10:03:37', 'alejandro', 'de otalora', '666666666', 'alexddo122@gmail.com', 'PENDIENTE'),
-(34, '', '2019-02-04 12:15:38', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE');
+(34, '', '2019-02-04 12:15:38', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(35, '', '2019-02-05 09:48:18', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE');
 
 -- --------------------------------------------------------
 
@@ -150,37 +150,6 @@ CREATE TABLE `orderproduct` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `orderproduct`
---
-
-INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
-(15, 10, 1),
-(15, 9, 1),
-(16, 10, 1),
-(16, 9, 1),
-(17, 10, 3),
-(18, 10, 1),
-(19, 10, 1),
-(20, 10, 1),
-(21, 10, 1),
-(22, 10, 1),
-(23, 10, 1),
-(24, 10, 1),
-(25, 10, 1),
-(26, 10, 1),
-(27, 10, 1),
-(28, 10, 1),
-(29, 10, 1),
-(30, 10, 1),
-(31, 10, 1),
-(32, 10, 1),
-(33, 7, 1),
-(33, 18, 1),
-(34, 10, 2),
-(34, 7, 2),
-(34, 18, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -201,18 +170,18 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`, `id_category`) VALUES
-(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg', 0),
-(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg', 0),
-(9, 'paella', 'ricas', 2.3, 'paella.jpeg', 0),
-(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg', 0),
-(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg', 0),
-(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg', 0),
-(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg', 0),
-(14, 'pate', 'ricas', 2.3, 'pate.jpeg', 0),
-(15, 'helado', 'ricas', 2.3, 'helado.jpeg', 0),
-(16, 'pollo', 'nada', 2.3, 'pollo.jpeg', 0),
-(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg', 0),
-(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg', 0),
+(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg', 1),
+(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg', 1),
+(9, 'paella', 'ricas', 2.3, 'paella.jpeg', 1),
+(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg', 1),
+(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg', 1),
+(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg', 1),
+(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg', 1),
+(14, 'pate', 'ricas', 2.3, 'pate.jpeg', 1),
+(15, 'helado', 'ricas', 2.3, 'helado.jpeg', 1),
+(16, 'pollo', 'nada', 2.3, 'pollo.jpeg', 1),
+(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg', 1),
+(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg', 1),
 (19, 'pepe', 'pepe', 15, 'pepe.jpeg', 1),
 (20, 'gege', 'gege', 14, 'gege.jpeg', 1);
 
@@ -249,7 +218,8 @@ ALTER TABLE `orderproduct`
 -- Indices de la tabla `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_categor_product` (`id_category`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -265,19 +235,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
@@ -289,6 +259,12 @@ ALTER TABLE `product`
 ALTER TABLE `orderproduct`
   ADD CONSTRAINT `fk_order_orderProduct` FOREIGN KEY (`idOrder`) REFERENCES `clientorder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_product_orderProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `fk_categor_product` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
