@@ -8656,6 +8656,7 @@ a.text-dark:hover, a.text-dark:focus {
 #cart {
   position: absolute;
   right: 10px;
+  top: 8px;
 }
 
 @media (max-width: 600px) {

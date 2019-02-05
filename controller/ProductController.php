@@ -9,7 +9,7 @@ class ProductController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
         require_once __DIR__."/../model/Category.php";
-        require_once __DIR__."/../model/User.php";
+        require_once __DIR__."  /../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
@@ -17,6 +17,16 @@ class ProductController extends GenericController {
     public function toProducts(){
         $id = null;
         $user = null;
+        $listProduct = 0;
+        $_SESSION["qty"] = 0;
+        if (isset($_SESSION["cart"])){
+            $quantity = 0;
+            foreach ($_SESSION["cart"] as $product) {
+                $quantity = $quantity + $product["quantity"];
+            }
+            $listProduct = $quantity;
+            $_SESSION["qty"] = $quantity;
+        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -24,17 +34,17 @@ class ProductController extends GenericController {
         $categories=new Category ($this->connection);
         $categories=$categories->getAll();
         $product = new Product($this->connection);
-       
+
             $product=$product->getAll();
-            $this->view("products", array(
+            $this->view("index", array(
                 "products" => $product,
                 "activate" => "active",
                 "id" => $id,
                 "user" => $user,
-                "listProduct" => $_SESSION["qty"],
+                "listProduct" => $listProduct,
                 "categories" => $categories
             ));
-        
+
     }
     public function allProducts(){
         $product = new Product($this->connection);
