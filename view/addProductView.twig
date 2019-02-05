@@ -3,7 +3,7 @@
     <form action="index.php?controller=Product&action=insert" class="col-md-6 offset-md-3" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input id="name" name="name" class="form-control" type="text" required>
+            <input id="name" name="name" class="form-control" type="text" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="descr">Descripcion</label>
@@ -11,17 +11,17 @@
         </div>
         <div class="form-group">
             <label for="category">Categoria</label>
-            <select class="selectpicker  show-menu-arrow form-control" name="categoryPicker" id="categoryPicker" required>
+            <select class="selectpicker  show-menu-arrow form-control" name="categoryPicker" id="categoryPicker">
                 <option value="0">Todas las categorias</option>
                 {% for element in categories %}
                     <option value="{{ element.id }}">{{ element.name }}</option>
                 {% endfor %}
             </select>
-            <input id="category" name="category" class="form-control" type="text" required>
+            <input id="category" name="category" class="form-control" type="text">
         </div>
         <div class="form-group">
             <label for="prize">Precio</label>
-            <input id="prize" name="prize" class="form-control" type="text" pattern="^[0-9].[0-9]{1,2}$" required placeholder="0.0">
+            <input id="prize" name="prize" class="form-control" type="text" pattern="^[0-9]{1,2}.[0-9]{1,2}$" required placeholder="0.0">
         </div>
        <div class="input-group mb-3">
             <div class="input-group-prepend">
