@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2019 a las 09:32:12
+-- Tiempo de generación: 05-02-2019 a las 09:04:19
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -79,37 +79,56 @@ CREATE TABLE `clientorder` (
 --
 
 INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_surname`, `client_number`, `client_email`, `status`) VALUES
-(2, 'aa', '2019-01-23 12:21:01', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(3, 'Hola como estamos', '2019-01-23 12:22:46', 'Alejandro', 'Diaz de Otalora', '987654321', 'alexddo122@gmail.com', 'ORDERED'),
-(4, 'aa', '2019-01-23 12:31:59', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(5, 'hola', '2019-01-23 12:34:10', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'ORDERED'),
-(10, '', '2019-01-30 10:30:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(11, '', '2019-01-30 10:31:50', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(12, '', '2019-01-30 10:33:30', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(13, '', '2019-01-30 10:43:58', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(14, '', '2019-01-30 10:48:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(15, '', '2019-01-30 10:49:00', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(16, '', '2019-01-30 10:49:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(17, '', '2019-01-31 09:01:53', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(18, '', '2019-01-31 09:04:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(19, '', '2019-01-31 09:04:52', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(20, '', '2019-01-31 09:05:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(21, '', '2019-01-31 09:06:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(22, '', '2019-01-31 09:10:49', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(23, '', '2019-01-31 09:11:13', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(24, '', '2019-01-31 09:11:54', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(25, '', '2019-01-31 09:12:31', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(26, '', '2019-01-31 09:13:51', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(27, '', '2019-01-31 09:15:40', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(28, '', '2019-01-31 09:16:22', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(29, '', '2019-01-31 09:21:34', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(30, '', '2019-01-31 09:22:06', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED'),
-(32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ORDERED');
+(2, 'aa', '2019-01-23 12:21:01', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(3, 'Hola como estamos', '2019-01-23 12:22:46', 'Alejandro', 'Diaz de Otalora', '987654321', 'alexddo122@gmail.com', 'PENDIENTE'),
+(4, 'aa', '2019-01-23 12:31:59', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(5, 'hola', '2019-01-23 12:34:10', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
+(10, '', '2019-01-30 10:30:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(11, '', '2019-01-30 10:31:50', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(12, '', '2019-01-30 10:33:30', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(13, '', '2019-01-30 10:43:58', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(14, '', '2019-01-30 10:48:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(15, '', '2019-01-30 10:49:00', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(16, '', '2019-01-30 10:49:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(17, '', '2019-01-31 09:01:53', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(18, '', '2019-01-31 09:04:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(19, '', '2019-01-31 09:04:52', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(20, '', '2019-01-31 09:05:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(21, '', '2019-01-31 09:06:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(22, '', '2019-01-31 09:10:49', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(23, '', '2019-01-31 09:11:13', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(24, '', '2019-01-31 09:11:54', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(25, '', '2019-01-31 09:12:31', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(26, '', '2019-01-31 09:13:51', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(27, '', '2019-01-31 09:15:40', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(28, '', '2019-01-31 09:16:22', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(29, '', '2019-01-31 09:21:34', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(30, '', '2019-01-31 09:22:06', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
+(33, '', '2019-02-01 10:03:37', 'alejandro', 'de otalora', '666666666', 'alexddo122@gmail.com', 'PENDIENTE'),
+(34, '', '2019-02-04 12:15:38', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `options`
+--
+
+CREATE TABLE `options` (
+  `noOrders` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `options`
+--
+
+INSERT INTO `options` (`noOrders`) VALUES
+(0);
 
 -- --------------------------------------------------------
 
@@ -147,7 +166,12 @@ INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
 (29, 10, 1),
 (30, 10, 1),
 (31, 10, 1),
-(32, 10, 1);
+(32, 10, 1),
+(33, 7, 1),
+(33, 18, 1),
+(34, 10, 2),
+(34, 7, 2),
+(34, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -254,7 +278,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
