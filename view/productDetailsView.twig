@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="prize">Precio</label>
-            <input id="prize" name="prize" class="form-control" type="text" value="{{ product.prize }}" pattern="[0-9]*||[0-9].[0-9]" required>
+            <input id="prize" name="prize" class="form-control" type="text" value="{{ product.prize }}" pattern="^[0-9].[0-9]{1,2}$" required>
         </div>
         <div class="form-group">
             <img src="img/productImg/{{ product.img }}" width="100">
