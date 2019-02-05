@@ -11,15 +11,13 @@
         </div>
         <div class="form-group">
             <label for="category">Categoria</label>
-            <select class="  show-menu-arrow form-control   selectpicker" name="categoryPicker" id="categoryPicker">
+            <select class="selectpicker  show-menu-arrow form-control" name="categoryPicker" id="categoryPicker">
                 <option value="0">Todas las categorias</option>
                 {% for element in categories %}
                     <option value="{{ element.id }}">{{ element.name }}</option>
                 {% endfor %}
             </select>
             <input id="category" name="category" class="form-control" type="text">
-            <button type="button" class="btn btn-outline-success" id="addCategory"><i class="fas fa-plus"></i> Añadir categoria</button>
-
         </div>
         <div class="form-group">
             <label for="prize">Precio</label>
