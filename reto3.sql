@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-02-2019 a las 03:23:11
+-- Tiempo de generación: 06-02-2019 a las 03:46:27
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.1.26
 
@@ -84,6 +84,14 @@ CREATE TABLE `clientorder` (
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `clientorder`
+--
+
+INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_surname`, `client_number`, `client_email`, `status`) VALUES
+(47, '', '2019-02-06 11:30:29', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ENTREGADO'),
+(48, '', '2019-02-06 11:31:36', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'ENTREGADO');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +121,16 @@ CREATE TABLE `orderproduct` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `orderproduct`
+--
+
+INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
+(47, 32, 2),
+(47, 24, 1),
+(47, 28, 2),
+(48, 25, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -137,12 +155,12 @@ INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`, `id_category
 (25, 'Lasaña', 'Lasaña de carne picada de 4 pisos.', 3.4, 'Lasaña.jpeg', 7),
 (26, 'Menestra', 'Menestra de verduras.', 3.6, 'Menestra.png', 8),
 (27, 'Shushi', 'Shushi con pescado de alta calidad.', 7.95, 'Shushi.jpeg', 6),
-(28, 'Ensalada', 'Ensalada de pepino con alguna decoración.', 6.5, 'Ensalada.', NULL),
+(28, 'Ensalada', 'Ensalada de pepino con alguna decoración.', 6.5, 'ensalada.jpeg', NULL),
 (29, 'Tarta', 'Tarta de chocolate.', 9.5, 'Tarta.png', 10),
 (30, 'Escalope', 'Escalope con salsa tropical.', 4.5, 'Escalope.jpeg', 6),
 (31, 'Tortilla', 'Tortilla de verduras.', 5.5, 'Tortilla.jpeg', 8),
 (32, 'Bombones', 'Bombones variados de chocolate.', 3.2, 'Bombones.jpeg', 10),
-(33, 'Empanada', 'Empanada de atún.', 7.6, 'Empanada.', NULL);
+(33, 'Empanada', 'Empanada de atún.', 7.6, 'Empanada.jpeg', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -200,7 +218,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
