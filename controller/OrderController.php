@@ -96,7 +96,7 @@ class OrderController extends GenericController {
             $order = $this->setAll(new Order($this->connection));
             $ok = $order->insertOrder();
             if ($ok != 0){
-                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/confirm/".$ok, $ok, $_SESSION["cart"]);
+                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/index.php?controller=Order&action=confirmOrder&idOrder=".$ok, $ok, $_SESSION["cart"]);
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
@@ -114,11 +114,56 @@ class OrderController extends GenericController {
             "listProduct" => $_SESSION["qty"]
         ));
     }
+    function translate($key){
+        $dayNames = ["Wednesday"=>"Miercoles", "Thursday"=>"Jueves", "Friday"=>"Viernes", "Saturday"=>"Sabado"];
+        return $dayNames[$key];
+    }
+    function prepareDate(){
+        $Date = date("Y/m/d");
+        switch (date("l")){
+            case "Monday":
+                $days = 4;
+                $daysEnd = 5;
+                break;
+            case "Tuesday":
+                $days = 8;
+                $daysEnd = 11;
+                break;
+            case "Wednesday":
+                $days = 7;
+                $daysEnd = 10;
+                break;
+            case "Thursday":
+                $days = 6;
+                $daysEnd = 9;
+                break;
+            case "Friday":
+                $days = 5;
+                $daysEnd = 8;
+                break;
+            case "Saturday":
+                $days = 4;
+                $daysEnd = 7;
+                break;
+            case "Sunday":
+                $days = 4;
+                $daysEnd = 6;
+                break;
+        }
+        return "Entre el ".$this->translate(date('l', strtotime($Date. ' + '.$days.' days')))
+            ." ".date('d/m/Y', strtotime($Date. ' + '.$days.' days'))
+            ." y el ".$this->translate(date('l', strtotime($Date. ' + '.$daysEnd.' days')))
+            ." ".date('d/m/Y', strtotime($Date. ' + '.$daysEnd.' days'))." de 11:30 a 20:00";
+    }
+
     public function confirmOrder(){
         $order = new Order($this->connection);
         $order->updateClientOrder($_GET["idOrder"], "CONFIRMADO");
         $this->view("orderConfirm", array(
-            "title"=>"orderConfirm"
+            "title"=>"orderConfirm",
+            "display"=>"d-none",
+            "cols"=>"col-6",
+            "fechaRecogida"=>$this->prepareDate()
         ));
     }
     public function deleteOrder(){
