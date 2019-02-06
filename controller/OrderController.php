@@ -75,8 +75,11 @@ class OrderController extends GenericController {
         $order->setUserEmail($_POST["email"]);
         return $order;
     }
-    public function allStatistics()
-    {
+    public function getAllStatistics(){
+        $product = new Order($this->connection);
+        print_r(json_encode($product->getProductCount()));
+    }
+    public function allStatistics(){
         $product = new Order($this->connection);
         $this->view("adminStatistics", array(
             "title"=>'Estadisticas de ventas',
@@ -96,7 +99,7 @@ class OrderController extends GenericController {
             $order = $this->setAll(new Order($this->connection));
             $ok = $order->insertOrder();
             if ($ok != 0){
-                $this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/index.php?controller=Order&action=confirmOrder&idOrder=".$ok, $ok, $_SESSION["cart"]);
+                //$this->mail_send($_POST["name"], $_POST["email"], "http://batcodedev.tk/index.php?controller=Order&action=confirmOrder&idOrder=".$ok, $ok, $_SESSION["cart"]);
                 $_SESSION["qty"] = 0;
                 $_SESSION["cart"] = null;
                 echo "1";
