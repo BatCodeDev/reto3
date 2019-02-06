@@ -15,29 +15,7 @@ class UserController extends GenericController {
     public function admin1234(){
         $this->view("adminLogin", array());
     }
-    public function index(){
-        $id = null;
-        $user = null;
-        $listProduct = 0;
-        $_SESSION["qty"] = 0;
-        if (isset($_SESSION["cart"])){
-            $quantity = 0;
-            foreach ($_SESSION["cart"] as $product) {
-                $quantity = $quantity + $product["quantity"];
-            }
-            $listProduct = $quantity;
-        }
-        if (isset($_SESSION["id"], $_SESSION["user"])){
-            $id = $_SESSION["id"];
-            $user = $_SESSION["user"];
-        }
-        $this->view("index", array(
-            "title"=>"BatFood",
-            "id"=>$id,
-            "user"=> $user,
-            "listProduct" => $listProduct
-        ));
-    }
+
     public function loginValidate(){
         if(isset($_POST["user"], $_POST["pass"])){
             $user = new User($this->connection);
