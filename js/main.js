@@ -173,15 +173,38 @@ let errorLogin = function (data) {
         $("#msg i").addClass("fa-times-circle");
         $("#msg").show();
     }
-}
+};
 
 let addCart = function (data) {
     location.reload();
-}
+};
 let searchProducts=function (data) {
     $('#resultSearch').html(data);
-}
-
+};
+let statisticsAction = function (data) {
+    data = JSON.parse(data);
+    let dataQty = [];
+    let dataLvls = [];
+    for (x = 0; x < data.length; x++){
+        dataLvls.push(data[x].name);
+        dataQty.push(data[x].pQuantity);
+    }
+    let ctxD = document.getElementById("doughnutChart").getContext('2d');
+    let myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: dataLvls,
+            datasets: [{
+                data: dataQty,
+                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+};
 
 $('#addCategory').click(function () {
     let send_data = "";
