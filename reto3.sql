@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2019 a las 10:00:48
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Servidor: localhost:3306
+-- Tiempo de generación: 06-02-2019 a las 03:23:11
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `reto3`
+-- Base de datos: `retotres`
 --
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `name`, `telephone`, `clientorders`) VALUES
-(1, 'admin', 'admin', 'Alejandro', '999999999', NULL),
-(2, 'admin2', 'admin2', 'Rafa', '888888888', NULL),
-(3, 'admin3', 'admin3', 'Alfonso', '777777777', NULL);
+(1, 'admin', 'Alejandro', 'Alejandro', '999999999', NULL),
+(2, 'admin2', 'Rafa', 'Rafa', '888888888', NULL),
+(3, 'admin3', 'Alfonso', 'Alfonso', '777777777', NULL);
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'pescado');
+(6, 'Pescados'),
+(7, 'Carne'),
+(8, 'Entrantes'),
+(10, 'Postres');
 
 -- --------------------------------------------------------
 
@@ -80,46 +83,6 @@ CREATE TABLE `clientorder` (
   `client_email` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `clientorder`
---
-
-INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_surname`, `client_number`, `client_email`, `status`) VALUES
-(2, 'aa', '2019-01-23 12:21:01', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(3, 'Hola como estamos', '2019-01-23 12:22:46', 'Alejandro', 'Diaz de Otalora', '987654321', 'alexddo122@gmail.com', 'PENDIENTE'),
-(4, 'aa', '2019-01-23 12:31:59', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(5, 'hola', '2019-01-23 12:34:10', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(10, '', '2019-01-30 10:30:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(11, '', '2019-01-30 10:31:50', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(12, '', '2019-01-30 10:33:30', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(13, '', '2019-01-30 10:43:58', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(14, '', '2019-01-30 10:48:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(15, '', '2019-01-30 10:49:00', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(16, '', '2019-01-30 10:49:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(17, '', '2019-01-31 09:01:53', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(18, '', '2019-01-31 09:04:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(19, '', '2019-01-31 09:04:52', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(20, '', '2019-01-31 09:05:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(21, '', '2019-01-31 09:06:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(22, '', '2019-01-31 09:10:49', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(23, '', '2019-01-31 09:11:13', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(24, '', '2019-01-31 09:11:54', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(25, '', '2019-01-31 09:12:31', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(26, '', '2019-01-31 09:13:51', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(27, '', '2019-01-31 09:15:40', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(28, '', '2019-01-31 09:16:22', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(29, '', '2019-01-31 09:21:34', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(30, '', '2019-01-31 09:22:06', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(33, '', '2019-02-01 10:03:37', 'alejandro', 'de otalora', '666666666', 'alexddo122@gmail.com', 'PENDIENTE'),
-(34, '', '2019-02-04 12:15:38', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(35, '', '2019-02-05 09:48:18', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE');
 
 -- --------------------------------------------------------
 
@@ -170,20 +133,16 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`, `id_category`) VALUES
-(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg', 1),
-(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg', 1),
-(9, 'paella', 'ricas', 2.3, 'paella.jpeg', 1),
-(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg', 1),
-(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg', 1),
-(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg', 1),
-(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg', 1),
-(14, 'pate', 'ricas', 2.3, 'pate.jpeg', 1),
-(15, 'helado', 'ricas', 2.3, 'helado.jpeg', 1),
-(16, 'pollo', 'nada', 2.3, 'pollo.jpeg', 1),
-(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg', 1),
-(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg', 1),
-(19, 'pepe', 'pepe', 15, 'pepe.jpeg', 1),
-(20, 'gege', 'gege', 14, 'gege.jpeg', 1);
+(24, 'Canelones', 'Canelones de atún con bechamel.', 5.5, 'Canelones.jpeg', 6),
+(25, 'Lasaña', 'Lasaña de carne picada de 4 pisos.', 3.4, 'Lasaña.jpeg', 7),
+(26, 'Menestra', 'Menestra de verduras.', 3.6, 'Menestra.png', 8),
+(27, 'Shushi', 'Shushi con pescado de alta calidad.', 7.95, 'Shushi.jpeg', 6),
+(28, 'Ensalada', 'Ensalada de pepino con alguna decoración.', 6.5, 'Ensalada.', NULL),
+(29, 'Tarta', 'Tarta de chocolate.', 9.5, 'Tarta.png', 10),
+(30, 'Escalope', 'Escalope con salsa tropical.', 4.5, 'Escalope.jpeg', 6),
+(31, 'Tortilla', 'Tortilla de verduras.', 5.5, 'Tortilla.jpeg', 8),
+(32, 'Bombones', 'Bombones variados de chocolate.', 3.2, 'Bombones.jpeg', 10),
+(33, 'Empanada', 'Empanada de atún.', 7.6, 'Empanada.', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -235,19 +194,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas
