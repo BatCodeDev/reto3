@@ -55,9 +55,9 @@ class ProductController extends GenericController {
             "listProduct" => $_SESSION["qty"]
         ));
     }
+
+
     public function setAll($product){
-       // var_dump(die( $_POST["name"]));
-        echo 'qweq';
         $product->setName($_POST["name"]);
         $product->setDescription($_POST["descr"]);
         $product->setPrize($_POST["prize"]);
@@ -65,8 +65,12 @@ class ProductController extends GenericController {
         if($_POST['categoryPicker']==0)
         {
             $category=new Category($this->connection);
-            $category=$category->getCategory($_POST["category"]);
-            //var_dump(die( $category[0]['id']));
+            $searchCategory=$category->getCategory($_POST["category"]);
+            if(empty($searchCategory))
+            {
+                $category->insertCategory($_POST["category"]);
+                $category=$category->getCategory($_POST["category"]);
+            }
             $product->setCategory( $category[0]['id']);
         }
         else
@@ -75,13 +79,10 @@ class ProductController extends GenericController {
         }
         return $product;
     }
+
+
     public function insert(){
 
-        $category = new Category($this->connection);
-        if(empty($category->getCategory($_POST["category"])))
-        {
-            $category->insertCategory($_POST["category"]);
-        }
         $product = $this->setAll(new Product($this->connection));
 
         $header = "location:index.php?controller=Product&action=toProducts";
@@ -117,6 +118,7 @@ class ProductController extends GenericController {
             "categories"=>$categories
         ));
     }
+
     public function details(){
         $id = null;
         $user = null;
@@ -126,11 +128,15 @@ class ProductController extends GenericController {
         }
         if(isset($_GET["idProduct"])){
             $product = new Product($this->connection);
+            $categories=new Category ($this->connection);
             $this->view("productDetails",array(
                 "title"=>"Detalles de producto",
                 "product"=>$product->searchById($_GET["idProduct"])[0],
                 "id"=>$id,
-                "user"=>$user
+
+                "user"=>$user,
+                "categories"=>$categories->getAll()
+
             ));
         }
     }
@@ -207,6 +213,5 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        //print_r($data);
     }
 }
