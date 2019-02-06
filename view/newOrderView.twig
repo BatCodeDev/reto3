@@ -6,7 +6,7 @@
             {% for p in cart %}
                 <div class="row card d-flex flex-row">
                     <div class="col-md-2">
-                        <img class="card-img-top" src="img/productImg/{{ p.img }}" alt="Card image cap">
+                        <img class="card-img-top mt-3" src="img/productImg/{{ p.img }}" alt="Card image cap">
                     </div>
                     <div class="row col-md-10 card-body align-items-center">
                         <div class="col-md-3">{{ p.name }}</div>
@@ -35,7 +35,7 @@
                 <div class="row col-md-8 card-body align-items-center">
                     <div class="col-md-4"></div>
                     <div class="col-md-4"><b>Total:</b></div>
-                    <div class="col-md-2"><span id="totalResult">{{ total }}</span> €</div>
+                    <div class="col-md-3"><span id="totalResult">{{ total }}</span> €</div>
                 </div>
             </div>
         </div>
@@ -43,11 +43,11 @@
             <form id="order_form" onsubmit="return ajax_listen(this.id, 'index.php?controller=Order&action=insert', errorCart)">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" name="name" type="text" class="form-control" required>
+                    <input id="name" name="name" type="text" class="form-control" required maxlength="30">
                 </div>
                 <div class="form-group">
                     <label for="surname">Apellidos</label>
-                    <input id="surname" name="surname" type="text" class="form-control" required>
+                    <input id="surname" name="surname" type="text" class="form-control" required maxlength="30">
                 </div>
                 <div class="form-group">
                     <label for="tlfo">Telefono</label>
@@ -55,11 +55,11 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" class="form-control" required>
+                    <input id="email" name="email" type="email" class="form-control" required maxlength="50">
                 </div>
                 <div class="form-group">
                     <label for="coment">Commentario</label>
-                    <textarea id="coment" name="coment" type="coment" class="form-control"></textarea>
+                    <textarea id="coment" name="coment" type="coment" class="form-control" maxlength="255"></textarea>
                 </div>
                 <div class="form-group">
                     <div id="orderMsg"><i></i><span></span></div>

@@ -1,3 +1,3 @@
 <?php
-define("DEFAULT_CONTROLLER", "User");
-define("DEFAULT_ACTION", "index");
+define("DEFAULT_CONTROLLER", "Product");
+define("DEFAULT_ACTION", "toProducts");

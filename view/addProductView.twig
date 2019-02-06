@@ -3,11 +3,11 @@
     <form action="index.php?controller=Product&action=insert" class="col-md-6 offset-md-3" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input id="name" name="name" class="form-control" type="text">
+            <input id="name" name="name" class="form-control" type="text" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="descr">Descripcion</label>
-            <textarea id="descr" name="descr" class="form-control" type="text"></textarea>
+            <textarea id="descr" name="descr" class="form-control" type="text" required maxlength="255"></textarea>
         </div>
         <div class="form-group">
             <label for="category">Categoria</label>
@@ -18,19 +18,17 @@
                 {% endfor %}
             </select>
             <input id="category" name="category" class="form-control" type="text">
-            <button type="button" class="btn btn-outline-success" id="addCategory"><i class="fas fa-plus"></i> Añadir categoria</button>
-
         </div>
         <div class="form-group">
             <label for="prize">Precio</label>
-            <input id="prize" name="prize" class="form-control" type="text">
+            <input id="prize" name="prize" class="form-control" type="text" pattern="^[0-9]{1,2}.[0-9]{1,2}$" required placeholder="0.0">
         </div>
        <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">Imagen</span>
             </div>
             <div class="custom-file">
-                <input type="file" name="img" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <input type="file" name="img" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
                 <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
             </div>
         </div>

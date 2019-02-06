@@ -9,7 +9,7 @@ class ProductController extends GenericController {
         require_once __DIR__."/../core/Connection.php";
         require_once __DIR__."/../model/Product.php";
         require_once __DIR__."/../model/Category.php";
-        require_once __DIR__."/../model/User.php";
+        require_once __DIR__."  /../model/User.php";
 
         $this->connect = new Connection();
         $this->connection = $this->connect->conexion();
@@ -17,6 +17,16 @@ class ProductController extends GenericController {
     public function toProducts(){
         $id = null;
         $user = null;
+        $listProduct = 0;
+        $_SESSION["qty"] = 0;
+        if (isset($_SESSION["cart"])){
+            $quantity = 0;
+            foreach ($_SESSION["cart"] as $product) {
+                $quantity = $quantity + $product["quantity"];
+            }
+            $listProduct = $quantity;
+            $_SESSION["qty"] = $quantity;
+        }
         if (isset($_SESSION["id"], $_SESSION["user"])){
             $id = $_SESSION["id"];
             $user = $_SESSION["user"];
@@ -24,17 +34,17 @@ class ProductController extends GenericController {
         $categories=new Category ($this->connection);
         $categories=$categories->getAll();
         $product = new Product($this->connection);
-       
+
             $product=$product->getAll();
-            $this->view("products", array(
+            $this->view("index", array(
                 "products" => $product,
                 "activate" => "active",
                 "id" => $id,
                 "user" => $user,
-                "listProduct" => $_SESSION["qty"],
-                "categories" => $categories
+                "listProduct" => $listProduct,
+                "categories" => $categories,
             ));
-        
+
     }
     public function allProducts(){
         $product = new Product($this->connection);
@@ -45,14 +55,36 @@ class ProductController extends GenericController {
             "listProduct" => $_SESSION["qty"]
         ));
     }
+
+
     public function setAll($product){
         $product->setName($_POST["name"]);
         $product->setDescription($_POST["descr"]);
         $product->setPrize($_POST["prize"]);
+
+        if($_POST['categoryPicker']==0)
+        {
+            $category=new Category($this->connection);
+            $searchCategory=$category->getCategory($_POST["category"]);
+            if(empty($searchCategory))
+            {
+                $category->insertCategory($_POST["category"]);
+                $category=$category->getCategory($_POST["category"]);
+            }
+            $product->setCategory( $category[0]['id']);
+        }
+        else
+        {
+            $product->setCategory($_POST["categoryPicker"]);
+        }
         return $product;
     }
+
+
     public function insert(){
+
         $product = $this->setAll(new Product($this->connection));
+
         $header = "location:index.php?controller=Product&action=toProducts";
         if(isset($_FILES)){
             $extension = explode("/", $_FILES["img"]["type"])[1];
@@ -86,12 +118,25 @@ class ProductController extends GenericController {
             "categories"=>$categories
         ));
     }
+
     public function details(){
+        $id = null;
+        $user = null;
+        if (isset($_SESSION["id"], $_SESSION["user"])){
+            $id = $_SESSION["id"];
+            $user = $_SESSION["user"];
+        }
         if(isset($_GET["idProduct"])){
             $product = new Product($this->connection);
+            $categories=new Category ($this->connection);
             $this->view("productDetails",array(
                 "title"=>"Detalles de producto",
-                "product"=>$product->searchById($_GET["idProduct"])[0]
+                "product"=>$product->searchById($_GET["idProduct"])[0],
+                "id"=>$id,
+
+                "user"=>$user,
+                "categories"=>$categories->getAll()
+
             ));
         }
     }
@@ -168,6 +213,5 @@ class ProductController extends GenericController {
             $product = new Product($this->connection);
             $product->delete($p, "product");
         }
-        //print_r($data);
     }
 }

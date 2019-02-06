@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2019 a las 09:04:19
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Servidor: localhost:3306
+-- Tiempo de generación: 06-02-2019 a las 03:23:11
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `reto3`
+-- Base de datos: `retotres`
 --
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `name`, `telephone`, `clientorders`) VALUES
-(1, 'admin', 'admin', 'Alejandro', '999999999', NULL),
-(2, 'admin2', 'admin2', 'Rafa', '888888888', NULL),
-(3, 'admin3', 'admin3', 'Alfonso', '777777777', NULL);
+(1, 'admin', 'Alejandro', 'Alejandro', '999999999', NULL),
+(2, 'admin2', 'Rafa', 'Rafa', '888888888', NULL),
+(3, 'admin3', 'Alfonso', 'Alfonso', '777777777', NULL);
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,16 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(6, 'Pescados'),
+(7, 'Carne'),
+(8, 'Entrantes'),
+(10, 'Postres');
 
 -- --------------------------------------------------------
 
@@ -73,45 +83,6 @@ CREATE TABLE `clientorder` (
   `client_email` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `clientorder`
---
-
-INSERT INTO `clientorder` (`id`, `commentary`, `date`, `client_name`, `client_surname`, `client_number`, `client_email`, `status`) VALUES
-(2, 'aa', '2019-01-23 12:21:01', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(3, 'Hola como estamos', '2019-01-23 12:22:46', 'Alejandro', 'Diaz de Otalora', '987654321', 'alexddo122@gmail.com', 'PENDIENTE'),
-(4, 'aa', '2019-01-23 12:31:59', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(5, 'hola', '2019-01-23 12:34:10', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(6, 'aa', '2019-01-23 12:34:32', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(7, 'a', '2019-01-23 12:36:50', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(8, 'a', '2019-01-23 12:40:33', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(9, 'a', '2019-01-23 12:50:43', 'a', 'a', 'a', 'alexddo122@gmail.com', 'PENDIENTE'),
-(10, '', '2019-01-30 10:30:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(11, '', '2019-01-30 10:31:50', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(12, '', '2019-01-30 10:33:30', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(13, '', '2019-01-30 10:43:58', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(14, '', '2019-01-30 10:48:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(15, '', '2019-01-30 10:49:00', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(16, '', '2019-01-30 10:49:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(17, '', '2019-01-31 09:01:53', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(18, '', '2019-01-31 09:04:24', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(19, '', '2019-01-31 09:04:52', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(20, '', '2019-01-31 09:05:04', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(21, '', '2019-01-31 09:06:47', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(22, '', '2019-01-31 09:10:49', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(23, '', '2019-01-31 09:11:13', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(24, '', '2019-01-31 09:11:54', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(25, '', '2019-01-31 09:12:31', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(26, '', '2019-01-31 09:13:51', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(27, '', '2019-01-31 09:15:40', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(28, '', '2019-01-31 09:16:22', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(29, '', '2019-01-31 09:21:34', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(30, '', '2019-01-31 09:22:06', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(31, '', '2019-01-31 09:23:28', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(32, '', '2019-01-31 09:24:45', 'JULIAAAN', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE'),
-(33, '', '2019-02-01 10:03:37', 'alejandro', 'de otalora', '666666666', 'alexddo122@gmail.com', 'PENDIENTE'),
-(34, '', '2019-02-04 12:15:38', 'alejandro', 'de otalora', '626032542', 'alexddo122@gmail.com', 'PENDIENTE');
 
 -- --------------------------------------------------------
 
@@ -142,37 +113,6 @@ CREATE TABLE `orderproduct` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `orderproduct`
---
-
-INSERT INTO `orderproduct` (`idOrder`, `idProduct`, `quantity`) VALUES
-(15, 10, 1),
-(15, 9, 1),
-(16, 10, 1),
-(16, 9, 1),
-(17, 10, 3),
-(18, 10, 1),
-(19, 10, 1),
-(20, 10, 1),
-(21, 10, 1),
-(22, 10, 1),
-(23, 10, 1),
-(24, 10, 1),
-(25, 10, 1),
-(26, 10, 1),
-(27, 10, 1),
-(28, 10, 1),
-(29, 10, 1),
-(30, 10, 1),
-(31, 10, 1),
-(32, 10, 1),
-(33, 7, 1),
-(33, 18, 1),
-(34, 10, 2),
-(34, 7, 2),
-(34, 18, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -184,37 +124,25 @@ CREATE TABLE `product` (
   `name` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL,
   `prize` double NOT NULL,
-  `img` varchar(100) NOT NULL
+  `img` varchar(100) NOT NULL,
+  `id_category` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`) VALUES
-(7, 'croquetas', 'muy ricas', 2.3, 'croquetas.jpeg'),
-(8, 'pasta', 'ricas', 2.3, 'pasta.jpeg'),
-(9, 'paella', 'ricas', 2.3, 'paella.jpeg'),
-(10, 'arroz', 'ricas', 2.3, 'arroz.jpeg'),
-(11, 'nachos', 'ricas', 2.3, 'nachos.jpeg'),
-(12, 'totilla', 'ricas', 2.3, 'tortilla.jpeg'),
-(13, 'galletas', 'ricas', 2.3, 'galletas.jpeg'),
-(14, 'pate', 'ricas', 2.3, 'pate.jpeg'),
-(15, 'helado', 'ricas', 2.3, 'helado.jpeg'),
-(16, 'pollo', 'nada', 2.3, 'pollo.jpeg'),
-(17, 'espagueti', 'nada', 4.1, 'espagueti.jpeg'),
-(18, 'ensalada', 'rica', 2.1, 'ensalada.jpeg');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `productcategory`
---
-
-CREATE TABLE `productcategory` (
-  `idProduct` int(5) NOT NULL,
-  `idCategory` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `product` (`id`, `name`, `description`, `prize`, `img`, `id_category`) VALUES
+(24, 'Canelones', 'Canelones de atún con bechamel.', 5.5, 'Canelones.jpeg', 6),
+(25, 'Lasaña', 'Lasaña de carne picada de 4 pisos.', 3.4, 'Lasaña.jpeg', 7),
+(26, 'Menestra', 'Menestra de verduras.', 3.6, 'Menestra.png', 8),
+(27, 'Shushi', 'Shushi con pescado de alta calidad.', 7.95, 'Shushi.jpeg', 6),
+(28, 'Ensalada', 'Ensalada de pepino con alguna decoración.', 6.5, 'Ensalada.', NULL),
+(29, 'Tarta', 'Tarta de chocolate.', 9.5, 'Tarta.png', 10),
+(30, 'Escalope', 'Escalope con salsa tropical.', 4.5, 'Escalope.jpeg', 6),
+(31, 'Tortilla', 'Tortilla de verduras.', 5.5, 'Tortilla.jpeg', 8),
+(32, 'Bombones', 'Bombones variados de chocolate.', 3.2, 'Bombones.jpeg', 10),
+(33, 'Empanada', 'Empanada de atún.', 7.6, 'Empanada.', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -249,14 +177,8 @@ ALTER TABLE `orderproduct`
 -- Indices de la tabla `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `productcategory`
---
-ALTER TABLE `productcategory`
-  ADD KEY `fk_product_productCategory` (`idProduct`),
-  ADD KEY `fk_category_productCategory` (`idCategory`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_categor_product` (`id_category`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -272,19 +194,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `clientorder`
 --
 ALTER TABLE `clientorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas
@@ -298,11 +220,10 @@ ALTER TABLE `orderproduct`
   ADD CONSTRAINT `fk_product_orderProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `productcategory`
+-- Filtros para la tabla `product`
 --
-ALTER TABLE `productcategory`
-  ADD CONSTRAINT `fk_category_productCategory` FOREIGN KEY (`idCategory`) REFERENCES `category` (`id`),
-  ADD CONSTRAINT `fk_product_productCategory` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`);
+ALTER TABLE `product`
+  ADD CONSTRAINT `fk_categor_product` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

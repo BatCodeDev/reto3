@@ -3,15 +3,26 @@
     <form action="index.php?controller=Product&action=insert&idProduct={{ product.id }}&mode=update" class="col-md-6 offset-md-3" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input id="name" name="name" class="form-control" type="text" value="{{ product.name }}">
+            <input id="name" name="name" class="form-control" type="text" value="{{ product.name }}" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="descr">Descripcion</label>
-            <textarea id="descr" name="descr" class="form-control" type="text">{{ product.description }}</textarea>
+            <textarea id="descr" name="descr" class="form-control" type="text" required maxlength="255">{{ product.description }}</textarea>
+
+        </div>
+        <div class="form-group">
+            <label for="category">Categoria</label>
+            <select class="selectpicker  show-menu-arrow form-control" name="categoryPicker" id="categoryPicker">
+                <option value="0">Todas las categorias</option>
+                {% for element in categories %}
+                    <option value="{{ element.id }}">{{ element.name }}</option>
+                {% endfor %}
+            </select>
+            <input id="category" name="category" class="form-control" type="text">
         </div>
         <div class="form-group">
             <label for="prize">Precio</label>
-            <input id="prize" name="prize" class="form-control" type="text" value="{{ product.prize }}">
+            <input id="prize" name="prize" class="form-control" type="text" value="{{ product.prize }}" pattern="^[0-9]{1,2}.[0-9]{1,2}$" required>
         </div>
         <div class="form-group">
             <img src="img/productImg/{{ product.img }}" width="100">
