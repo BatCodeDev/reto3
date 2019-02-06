@@ -42,7 +42,7 @@ class ProductController extends GenericController {
                 "id" => $id,
                 "user" => $user,
                 "listProduct" => $listProduct,
-                "categories" => $categories
+                "categories" => $categories,
             ));
 
     }
